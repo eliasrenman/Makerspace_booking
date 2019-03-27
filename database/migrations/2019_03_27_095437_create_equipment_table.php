@@ -15,7 +15,7 @@ class CreateEquipmentTable extends Migration
     {
         Schema::create('equipment', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('equipment')->unique();
+            $table->string('equipment');
             $table->boolean('restricted')->default(false);
             $table->timestamps();
         });
