@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class EquipmentController extends Controller
+class DisplayBookingController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -12,6 +12,16 @@ class EquipmentController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
+    {
+        //
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
     {
         //
     }
