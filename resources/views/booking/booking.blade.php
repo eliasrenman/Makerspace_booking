@@ -5,10 +5,10 @@
 @section('header-title','')
 
 @section('header-description','')
+
 @section('stylesheets')
     <link rel="stylesheet" type="text/css" href="css/index.css">
     <link rel="stylesheet" type="text/css" href="css/jsmodal.css">
-
 @endsection
 
 @section('content')
@@ -131,20 +131,20 @@
             <div class="col-md-2 col-xl-2"></div>
         </div>
     </div>
-@endsection
 
-@include('modal', [
-    'modal_title' => 'test title',
+    @include('modal', [
+    'modal_title' => 'terms title',
     'modal_id' => 'terms-modal',
-    'modal_content' => '<p>Testing</p>'
-])
+    'modal_content' => '<p>Terms Testing</p>'
+    ])
 
-@include('modal', [
+    @include('modal', [
     'modal_title' => 'policy title',
     'modal_id' => 'privacy-modal',
     'modal_content' => '<p>Testing</p>'
-])
+    ])
 
+@endsection
 
 @section('scripts')
     <script src="js/jsmodal.js"></script>
