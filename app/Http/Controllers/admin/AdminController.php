@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\booking;
 
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
 
-class EquipmentController extends Controller
+class AdminController extends Controller
 {
     /**
      * Display a listing of the resource.

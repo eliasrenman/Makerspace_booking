@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\booking;
 
 use App\Bookings;
 use App\Equipment;
+use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Http\Request;
 
