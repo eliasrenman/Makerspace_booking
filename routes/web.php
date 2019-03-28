@@ -12,16 +12,16 @@
 */
 
 //TODO Add route group when middleware is set up with google oauth
-//Route::prefix('/')->group(function () {
-    Route::get('/', 'BookingController@index');
+Route::prefix('/')->group(function () {
+    Route::post('', 'BookingController@store');
 
-    Route::post('/', 'BookingController@store');
+    Route::get('', 'BookingController@index');
 
-    Route::get('/finished/{data}', 'DisplayBookingController@finished');
+    Route::get('finished/{start}&{end}&{date}', 'DisplayBookingController@finished');
 
-    Route::get('/error/{data}', 'DisplayBookingController@error');
+    Route::get('error/{data}', 'DisplayBookingController@error');
 
-//});
+});
 
 
 //TODO Add route group for when middleware authentication is set up.

@@ -1,10 +1,6 @@
 @extends('layout')
 
-@section('title','Login')
-
-@section('header-title','')
-
-@section('header-description','')
+@section('title','Makerspace Bokning')
 
 @section('stylesheets')
     <link rel="stylesheet" type="text/css" href="css/index.css">

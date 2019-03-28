@@ -106,19 +106,29 @@ function submitData() {
 
     //json.author = $(".user-name").text();
     //console.log($(".equipment .button.selected span").text());
-    json['csrf-token'] = $('input[name^=_token]')[0].value;
+    json['_token'] = $('input[name^=_token]')[0].value;
     //var token = $('input[name^=_token]')[0].value;
-    json['equipment'] = $(".equipment .button.selected span")[0].getAttribute('value');
-    json['date'] = $(".date .button.selected span").data().value.toString();
-    json['timeStart'] = $(".from input").val();
-    json['timeEnd'] = $(".to input").val();
+    json.equipment = $(".equipment .button.selected span")[0].getAttribute('value');
+    json.date = $(".date .button.selected span").data().value.toString();
+    json.start = $(".from input").val();
+    json.end = $(".to input").val();
+
 
     console.log(json);
 
-    //posttwo(token,JSON.stringify(json))
-    var response = post("/", json);
-    console.log(response);
+    json = jsonToRequestString(json);
 
+    console.log(json);
+    post("/", json);
+}
+
+function jsonToRequestString(json) {
+    var out = "";
+    Object.keys(json).forEach(function(k){
+        out += k + '=' + json[k] + "&";
+    });
+
+    return out;
 }
 
 function post(url, json) {
@@ -131,11 +141,9 @@ function post(url, json) {
     http.onreadystatechange = function () {//Call a function when the state changes.
         if (this.readyState === 4) {
             if (this.status === 200) {
-                console.log(this);
-                //window.location.replace("/finished.php?start=" + json.timeStart + "&end=" + json.timeEnd + "&date=" + json.date);
+                window.location.replace(this.responseText);
             } else {
-                console.log(this);
-                //window.location.replace("/error.php?code=" + http.status);
+                window.location.replace("/error.php?code=" + this.status);
             }
         }
     };

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Bookings;
 use App\Equipment;
 use App\User;
 use Illuminate\Http\Request;
@@ -15,13 +16,9 @@ class BookingController extends Controller
      */
     public function index()
     {
-        //return view('booking.login');
-
-        //$equipment = Equipment::all();
-        $equipment = [['id' => '0', 'equipment' => 'Dator 1']];
+        $equipment = Equipment::all();
 
         $user = ['name' => 'Dev User', 'icon' => 'images/xfoxx%20avatar.png'];
-        //dd(compact('user', 'equipment'));
         return view('booking.booking', compact('user', 'equipment'));
     }
 
@@ -29,19 +26,28 @@ class BookingController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store()
     {
+        //TODO Get the user name from the google oauth instead of using default name.
+        //TODO Create proper validation here that validates the bookings.
+        $request = $this->castTime(
+                Request()->except('_token')
+            ) + ['name' => 'user name'];
+        Bookings::create($request);
 
+        $response = Request()->only('start', 'end', 'date');
+        echo "/finished/start={$response['start']}&end={$response['end']}&date={$response['date']}";
+        http_response_code(200);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
 
+    private function castTime($booking)
+    {
+        date_default_timezone_set('Europe/Stockholm');
+        $booking['start'] = (strtotime($booking['date'] . "T" . $booking['start']));
+        $booking['end'] = (strtotime($booking['date'] . "T" . $booking['end']));
+        unset($booking['date']);
+        return $booking;
+    }
 }
