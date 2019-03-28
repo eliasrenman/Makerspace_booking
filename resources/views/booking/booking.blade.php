@@ -40,17 +40,19 @@
                         </div>
                     </div>
                 </div>
+                @csrf
+
                 <div class="form-box equipment">
                     <h2 class="soleto-regular magenta">UTRUSTNING</h2>
                     <div class="header-line"></div>
                     <div class="buttons">
                         @foreach($equipment as $index)
-                            <a class="button" onclick="select(this, '.buttons>.button')" href="#button">
+    <a class="button" onclick="select(this, '.buttons>.button')" href="#button">
                                 <div class="button-filler magenta-fill"></div>
-                                <span class="soleto-regular"> {{ $index['equipment'] }}</span>
+                                <span class="soleto-regular" value="{{$index['id']}}"> {{ $index['equipment'] }}</span>
                             </a>
                         @endforeach
-                    </div>
+</div>
                 </div>
                 <div class="form-box time">
                     <h2 class="soleto-regular magenta">TID OCH DATUM</h2>
@@ -147,6 +149,6 @@
 @endsection
 
 @section('scripts')
-    @yield('childscripts')
+    <script src="js/jsmodal.js"></script>
     <script src="js/scripts.js"></script>
 @endsection

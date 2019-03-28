@@ -105,15 +105,18 @@ function submitData() {
     var json = {};
 
     //json.author = $(".user-name").text();
-    console.log($(".equipment .button.selected span").text());
-    json.equipment = $(".equipment .button.selected span").text();
-    json.date = $(".date .button.selected span").data().value.toString();
-    json.timeStart = $(".from input").val();
-    json.timeEnd = $(".to input").val();
+    //console.log($(".equipment .button.selected span").text());
+    json['csrf-token'] = $('input[name^=_token]')[0].value;
+    //var token = $('input[name^=_token]')[0].value;
+    json['equipment'] = $(".equipment .button.selected span")[0].getAttribute('value');
+    json['date'] = $(".date .button.selected span").data().value.toString();
+    json['timeStart'] = $(".from input").val();
+    json['timeEnd'] = $(".to input").val();
 
     console.log(json);
 
-    var response = post("/back-end/bookingHandler.php", json);
+    //posttwo(token,JSON.stringify(json))
+    var response = post("/", json);
     console.log(response);
 
 }
@@ -128,11 +131,13 @@ function post(url, json) {
     http.onreadystatechange = function () {//Call a function when the state changes.
         if (this.readyState === 4) {
             if (this.status === 200) {
-                window.location.replace("/finished.php?start=" + json.timeStart + "&end=" + json.timeEnd + "&date=" + json.date);
+                console.log(this);
+                //window.location.replace("/finished.php?start=" + json.timeStart + "&end=" + json.timeEnd + "&date=" + json.date);
             } else {
-                window.location.replace("/error.php?code=" + http.status);
+                console.log(this);
+                //window.location.replace("/error.php?code=" + http.status);
             }
         }
     };
-    http.send("insert=" + JSON.stringify(json));
+    http.send(json);
 }
