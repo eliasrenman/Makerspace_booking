@@ -147,6 +147,6 @@
 @endsection
 
 @section('scripts')
-    <script src="js/jsmodal.js"></script>
+    @yield('childscripts')
     <script src="js/scripts.js"></script>
 @endsection
