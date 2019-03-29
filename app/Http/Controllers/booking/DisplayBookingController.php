@@ -10,14 +10,19 @@ class DisplayBookingController extends Controller
 {
     public function finished($start, $end, $date)
     {
-        $text = json_decode(file_get_contents('JSON/finished-text.json'), true);
-        $text = $text[rand(0, count($text) - 1)];
-
+        $text = $this->getJson('JSON/finished-text.json');
         return view('booking.finished', compact(['start', 'end', 'date', 'text']));
     }
 
-    public function error()
+    public function error($error)
     {
-        return view('booking.error');
+        $text = $this->getJson('JSON/error-text.json');
+        return view('booking.error', compact(['error', 'text']));
+    }
+
+    public function getJson($path)
+    {
+        $text = json_decode(file_get_contents($path), true);
+        return $text[rand(0, count($text) - 1)];
     }
 }

@@ -35,10 +35,17 @@ class BookingController extends Controller
         $request = $this->castTime(
                 Request()->except('_token')
             ) + ['name' => 'user name'];
-        Bookings::create($request);
+        $request['equipment'] = explode(",", $request['equipment']);
+
+
+        foreach ($request['equipment'] as $index) {
+            $booking = $request;
+            $booking['equipment'] = $index;
+            Bookings::create($booking);
+        }
 
         $response = Request()->only('start', 'end', 'date');
-        echo "/finished/start={$response['start']}&end={$response['end']}&date={$response['date']}";
+        echo "/finished/{$response['start']}&{$response['end']}&{$response['date']}";
         http_response_code(200);
     }
 

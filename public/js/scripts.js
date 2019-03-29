@@ -10,7 +10,7 @@ function compareCss(element, css, value) {
 function select(button) {
     console.log(button);
     if (!$(button).hasClass("selected")) {
-        //$(".button").removeClass("selected");
+        $(".button").removeClass("selected");
         $(button).addClass("selected");
     }
     else {
@@ -23,7 +23,7 @@ function select(button) {
 function select(button, oldButton) {
     console.log(button);
     var b = $(button).hasClass("selected");
-    deselect(oldButton);
+    //deselect(oldButton);
 
     if (b) {
         deselect(button);
@@ -108,7 +108,11 @@ function submitData() {
     //console.log($(".equipment .button.selected span").text());
     json['_token'] = $('input[name^=_token]')[0].value;
     //var token = $('input[name^=_token]')[0].value;
-    json.equipment = $(".equipment .button.selected span")[0].getAttribute('value');
+    json.equipment = [];
+    $(".equipment .button.selected span").each(function (index, element) {
+        json.equipment[index] = (element.getAttribute('value'));
+    });
+    //json.equipment = [0].getAttribute('value');
     json.date = $(".date .button.selected span").data().value.toString();
     json.start = $(".from input").val();
     json.end = $(".to input").val();
@@ -143,7 +147,7 @@ function post(url, json) {
             if (this.status === 200) {
                 window.location.replace(this.responseText);
             } else {
-                window.location.replace("/error.php?code=" + this.status);
+                window.location.replace("/error/" + this.status);
             }
         }
     };
