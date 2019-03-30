@@ -6,7 +6,7 @@
 
 @section('header-description','')
 @section('stylesheets')
-    <link rel="stylesheet" type="text/css" href="css/finished.css">
+    <link rel="stylesheet" type="text/css" href="/css/finished.css">
 @endsection
 @section('content')
     <div class="login-container">

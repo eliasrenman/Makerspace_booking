@@ -17,9 +17,9 @@ Route::prefix('/')->group(function() {
 
     Route::get('', 'booking\BookingController@index');
 
-    Route::get('finished/{start}&{end}&{date}', 'booking.DisplayBookingController@finished');
+    Route::get('finished/{start}&{end}&{date}', 'booking\DisplayBookingController@finished');
 
-    Route::get('error/{data}', 'booking.DisplayBookingController@error');
+    Route::get('error/{error}', 'booking\DisplayBookingController@error');
 
 });
 
@@ -32,3 +32,7 @@ Route::prefix('/admin')->group(function() {
 
 });
 
+/*
+Route::get('/debug', function () {
+    return view('welcome');
+});*/
