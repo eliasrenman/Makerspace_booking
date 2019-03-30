@@ -1,0 +1,20 @@
+{
+  "500": {
+    "name": "500",
+    "description": "Internt serverfel",
+    "title": "Internal server error",
+    "modal-content": "<p class=\"soleto-light\">\n    Detta fel orsakas då något går snett av okänd orsak.\n</p>\n<hr>\n<h5 class=\"soleto-light\">Vad kan jag göra för att undvika felet?</h5>\n<p class=\"soleto-light\">\n    - Kolla på skärmen om någon annan har bokat samma tid som du.<br>\n    - Se till att du bokat tiden på rätt dag<br>\n    - Om du bokat tiden på en dag som ligger i framtiden kommer inte skärmen uppdateras med din bokning, då får du helt enkelt gissa.<br>\n    - Om du tror att det är något fel på systemet, kontakta någon av <a href=\"https://github.com/ntig-umea-students\" target=\"_blank\">hemsidans ägare<br>\n</p>"
+  },
+  "4001": {
+    "name": "4001",
+    "description": "En av dina inskrivna tider överlappade med en redan existerande bokning.",
+    "title": "Bad Request - Booking overlap",
+    "modal-content": "<p class=\"soleto-light\">\n    Detta fel orsakas då en eller flera tidstämplar överlappar med en redan existerande bokning.\n</p>\n<hr>\n<h5 class=\"soleto-light\">Vad kan jag göra för att undvika felet?</h5>\n<p class=\"soleto-light\">\n    - Kolla på skärmen om någon annan har bokat samma tid som du.<br>\n    - Se till att du bokat tiden på rätt dag<br>\n    - Om du bokat tiden på en dag som ligger i framtiden kommer inte skärmen uppdateras med din bokning, då får du helt enkelt gissa.<br>\n    - Om du tror att det är något fel på systemet, kontakta någon av <a href=\"https://github.com/ntig-umea-students\" target=\"_blank\">hemsidans ägare<br>\n</p>"
+  },
+  "4002": {
+    "name": "4002",
+    "description": "En av dina inskrivna tider tid kunde inte läsas.",
+    "title": "Bad Request - Invalid Timestamp",
+    "modal-content": "<p class=\"soleto-light\">\n    Detta fel orsakas då en eller flera tidstämplar inte kan läsas.\n</p>\n<hr>\n<h5 class=\"soleto-light\">Vad kan jag göra för att undvika felet?</h5>\n<p class=\"soleto-light\">\n    - Se till att dina tidsstämplar är korrekt inskrivna.<br>\n    - Se till att du bokat tiden på rätt dag<br>\n    - Om du tror att det är något fel på systemet, kontakta någon av <a href=\"https://github.com/ntig-umea-students\" target=\"_blank\">hemsidans ägare</a></li>\n</p>\n</p>"
+  }
+}

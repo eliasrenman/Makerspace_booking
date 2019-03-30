@@ -28,11 +28,9 @@
                     <div class="info-container">
                         <p class="soleto-light"><br></p>
                         <h3 class="soleto-bold pt-4 pb-0 m-0">{{$text['header']}}</h3>
-                        <p class="soleto-light">
-
-                            <br>
+                        <p class="soleto-light">{{$error['description']}}<br>
                             <a href="#modal" class="soleto-light" onclick="openModal('#error-modal')">Mer info om
-                                error {{$error}}</a>
+                                error {{$error['name']}}</a>
                         </p>
                     </div>
                 </div>
@@ -42,9 +40,9 @@
     </div>
 
     @include('modal', [
-    'modal_title' => 'policy title',
+    'modal_title' => $error['title'],
     'modal_id' => 'error-modal',
-    'modal_content' => '<p>Testing</p>'
+    'modal_content' => $error['modal-content']
     ])
 
 @endsection
