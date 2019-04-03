@@ -21,6 +21,10 @@ Route::prefix('/')->group(function() {
 
     Route::get('error/{error}', 'booking\DisplayBookingController@error');
 
+    Route::get('/debug', function () {
+        return view('welcome');
+    });
+
 });
 
 //TODO Add route group for when middleware authentication is set up.
@@ -32,7 +36,4 @@ Route::prefix('/admin')->group(function() {
 
 });
 
-/*
-Route::get('/debug', function () {
-    return view('welcome');
-});*/
+
