@@ -55,6 +55,7 @@ class BookingRequest extends FormRequest
 
     private function checkAvailability()
     {
+
         $start = $this->start;
         $end = $this->end;
         $count = 0;
@@ -63,19 +64,18 @@ class BookingRequest extends FormRequest
                 $query
                     ->where(function ($query) use ($start, $end, $equipment) {
                         $query
-                            ->where('start', '>=', $start)
-                            ->where('end', '<', $start)
+                            ->where('start', '<', $start)
+                            ->where('end', '>', $start)
                             ->where('equipment', '=', $equipment);
                     })
                     ->orWhere(function ($query) use ($start, $end, $equipment) {
                         $query
                             ->where('start', '<', $end)
-                            ->where('end', '>=', $end)
+                            ->where('end', '>', $end)
                             ->where('equipment', '=', $equipment);
                     });
             })->count();
         }
-
         if ($count != 0) return false;
         return true;
     }
