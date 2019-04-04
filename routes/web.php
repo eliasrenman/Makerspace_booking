@@ -11,19 +11,32 @@
 |
 */
 
-//TODO Add route group when middleware is set up with google oauth
+
+
+
 Route::prefix('/')->group(function() {
+
+    Route::get('redirect', 'Auth\GoogleOauthController@redirectToProvider');
+    Route::get('callback', 'Auth\GoogleOauthController@handleProviderCallback');
+
     Route::post('', 'booking\BookingController@store');
 
-    Route::get('', 'booking\BookingController@index');
+    Route::get('login', 'booking\BookingController@login');
+    Route::get('logout', 'booking\BookingController@logout');
 
-    Route::get('finished/{start}&{end}&{date}', 'booking\DisplayBookingController@finished');
+    Route::middleware(['oauth'])->group(function () {
 
-    Route::get('error/{error}', 'booking\DisplayBookingController@error');
+        Route::get('', 'booking\BookingController@index');
 
-    Route::get('/debug', function () {
-        return view('welcome');
+        Route::get('finished/{start}&{end}&{date}', 'booking\DisplayBookingController@finished');
+
+        Route::get('error/{error}', 'booking\DisplayBookingController@error');
+
     });
+
+    /*Route::get('/debug', function () {
+        return view('welcome');
+    });*/
 
 });
 

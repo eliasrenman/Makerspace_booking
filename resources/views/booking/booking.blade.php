@@ -17,7 +17,6 @@
                     <div class="grid-row row">
                         <div class="col-sm-8 column">
                             <div class="user-info">
-
                                 <img src=" {{ $user['icon'] }}" class="user-image">
                                 <span class="user-name soleto-regular magenta">{{ $user['name']}}</span>
                             </div>
@@ -27,7 +26,7 @@
                         <div class="col column log-out-column">
                             <div class="log-out-container">
                                 <div class="log-out">
-                                    <a href="back-end/oauthHandler.php?logout=1">
+                                    <a href="/logout">
                                         <img src="images/Ikon%20logga-ut.svg">
                                         <span class="soleto-regular">Logga ut</span>
                                     </a>

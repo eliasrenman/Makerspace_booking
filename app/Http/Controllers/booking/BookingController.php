@@ -18,12 +18,31 @@ class BookingController extends Controller
      */
     public function index()
     {
-        $equipment = Equipment::all();
+        $user = resolve('user');
+        if ($user['teacher']) {
+            $equipment = Equipment::all();
+        } else {
+            $equipment = Equipment::all()->where('restricted',0);
+        }
 
-        $user = ['name' => 'Dev User', 'icon' => 'images/xfoxx%20avatar.png'];
         return view('booking.booking', compact('user', 'equipment'));
     }
 
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function login()
+    {
+        return view('booking.login');
+    }
+
+    public function logout()
+    {
+        session()->remove('google_token');
+        return redirect('/login');
+    }
 
     /**
      * Store a newly created resource in storage.
