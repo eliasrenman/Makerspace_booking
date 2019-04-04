@@ -18,7 +18,8 @@ class BookingController extends Controller
      */
     public function index()
     {
-        $user = resolve('user');
+        $user = session()->get('user');
+
         if ($user['teacher']) {
             $equipment = Equipment::all();
         } else {

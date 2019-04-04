@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Bookings;
+use App\Equipment;
 use App\Rules\afterToday;
 use App\Rules\DifferenceBiggerThan;
 use Illuminate\Foundation\Http\FormRequest;
@@ -17,11 +18,10 @@ class BookingRequest extends FormRequest
 {
     public function prepareForValidation()
     {
-        //TODO Get the user name from the google oauth instead of using default name.
         $this->merge([
             'start' => $this->castTime($this->start, $this->date),
             'end' => $this->castTime($this->end, $this->date),
-            'name' => 'Dev name',
+            'name' => (session()->get('user'))['name'],
             'equipment' => json_decode($this->equipment)
         ]);
         $this->request->remove('date');
@@ -32,8 +32,19 @@ class BookingRequest extends FormRequest
     {
 
         $validator->after(function ($validator) {
-            if (!$this->checkAvailability()) {
-                $validator->errors()->add('unavailable', 'Den bokade tiden är upptagen');
+            if (!$this->checkIfExists()) {
+                $validator->errors()->add('bad request', 'Denna bokning existerar inte');
+            } else if ($this->isTeacher()) {
+                //TODO Create booking edit priveleges for teachers to adjust overlapping time bookings.
+                if (!$this->checkAvailability()) {
+                    $this->adjustBookings();
+                }
+            } else {
+                if (!$this->checkPermission()) {
+                    $validator->errors()->add('forbidden', 'Du har inte tillåtelse att boka denna sak');
+                } else if (!$this->checkAvailability()) {
+                    $validator->errors()->add('unavailable', 'Den bokade tiden är upptagen');
+                }
             }
         });
     }
@@ -51,6 +62,42 @@ class BookingRequest extends FormRequest
             'start' => ['required', 'numeric', new afterToday()],
             'end' => ['required', 'numeric', new DifferenceBiggerThan(1799, $this->start)],
         ];
+    }
+
+    private function adjustBookings()
+    {
+
+    }
+
+    private function isTeacher()
+    {
+        return (session()->get('user'))['teacher'];
+    }
+
+    private function checkIfExists()
+    {
+        foreach ($this->equipment as $equipment) {
+            $value = Equipment::where('id', '=', $equipment)->first();
+            if (!isset($value)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private function checkPermission()
+    {
+        $user = session()->get('user');
+        $this->equipment;
+        foreach ($this->equipment as $equipment) {
+            $value = Equipment::where('id', '=', $equipment)->first()->restricted;
+            if ($value) {
+                if (!$user['teacher']) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
     private function checkAvailability()

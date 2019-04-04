@@ -34,9 +34,9 @@ Route::prefix('/')->group(function() {
 
     });
 
-    /*Route::get('/debug', function () {
+    Route::get('/debug', function () {
         return view('welcome');
-    });*/
+    });
 
 });
 

@@ -11,8 +11,8 @@ class GoogleOauthMiddleware
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
+     * @param  \Illuminate\Http\Request $request
+     * @param  \Closure $next
      * @return mixed
      */
     public function handle($request, Closure $next)
@@ -39,12 +39,14 @@ class GoogleOauthMiddleware
      * This will get the name and icon of the requested user and put it in a instance called user.
      * @param Google_Client $client the logged in client
      */
-    private function getMe(Google_Client $client) {
+    private function getMe(Google_Client $client)
+    {
         $me = (new Google_Service_Plus($client))->people->get("me");
-        app()->instance('user', [
+
+        session(['user' => [
             'name' => $me['displayName'],
             'icon' => $me['image']['url'],
             'teacher' => ($me['domain'] == 'ga.ntig.se'),
-        ]);
+        ]]);
     }
 }
