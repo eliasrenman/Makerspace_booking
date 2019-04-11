@@ -384,3 +384,18 @@ input[type="time"]::-ms-clear {
         min-width: 700px;
     }
 }
+
+.form-margin {
+    margin: 20px;
+}
+
+#alreadyBooked {
+    overflow-y: hidden;
+    transition: max-height 0.5s ease-in-out;
+    padding: 0 !important;
+    max-height: 0;
+}
+#alreadyBooked.open {
+    padding: unset;
+    max-height: 1000px; /* Affects animation speed, leave at 1000 for best effect. */
+}

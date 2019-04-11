@@ -12,8 +12,7 @@ function select(button) {
     if (!$(button).hasClass("selected")) {
         $(".button").removeClass("selected");
         $(button).addClass("selected");
-    }
-    else {
+    } else {
         deselect(button);
     }
 
@@ -53,6 +52,11 @@ function checkRequired() {
             date = true;
         }
     });
+    if (date === true && equipment === true) {
+        drawBookings()
+    } else {
+        clearBookings();
+    }
 
     var radioFiller = $(".radio").hasClass("selected");
 
@@ -70,23 +74,18 @@ function checkRequired() {
     $(".submit-button").attr("href", null);
     if (inverseTime) {
         $(".error-message").text("Du kan inte boka en negativ mängd tid");
-    }
-    else if (!validFromTime) {
+    } else if (!validFromTime) {
         $(".error-message").text("'Från klockan' måste vara mellan 8:00 och 16:00");
-    }
-    else if (!validToTime) {
+    } else if (!validToTime) {
         $(".error-message").text("'Till klockan' måste vara mellan 8:00 och 16:00");
-    }
-    else if (!date) {
+    } else if (!date) {
         $(".error-message").text("Du måste välja en dag att boka på");
-    }
-    else if (!equipment) {
+    } else if (!equipment) {
         $(".error-message").text("Du måste välja utrustning");
-    }
-    else if (!radioFiller) {
+    } else if (!radioFiller) {
         $(".error-message").text("Du måste bekräfta våra villkor");
-    }
-    else {
+    } else {
+        $(".error-message").text("");
         $(".submit-button").addClass("enabled");
         $(".submit-button").attr("href", "#submit");
     }
@@ -128,11 +127,61 @@ function submitData() {
 
 function jsonToRequestString(json) {
     var out = "";
-    Object.keys(json).forEach(function(k){
+    Object.keys(json).forEach(function (k) {
         out += k + '=' + json[k] + "&";
     });
 
     return out;
+}
+
+function drawBookings() {
+    var equipment = $(".equipment .button.selected span").text();
+    var date = $(".date .button.selected span").data().day.toString();
+    //TODO this works with old api but needs to be switched to new url and accept array of equipment ids instead of name
+    var rest = "https://ntig-makerspace.herokuapp.com/?requestEquipmentData&equipment=" + equipment + "&day=" + date;
+    console.log(rest);
+    //var rest = "http://localhost/?requestEquipmentData&equipment=" + equipment + "&day=" + date;
+    rest = rest.replace(" ", "%20");
+    httpGetAsync(rest, updateBookings);
+}
+
+function clearBookings() {
+    $("#alreadyBooked").removeClass("open");
+}
+
+function castTime(hour) {
+    var minutes = (hour % 60);
+    hour -= minutes;
+    hour = (hour / 60) + 8;
+    if (minutes < 10) minutes = "0" + minutes;
+    if (hour < 10) hour = "0" + hour;
+    return hour + ":" + minutes;
+}
+
+function updateBookings(input) {
+    input = JSON.parse(input);
+    if (Object.keys(input).length === 0) {
+        clearBookings();
+        return 0;
+    } else {
+        $("#alreadyBooked").addClass("open");
+    }
+    $("#booked-times").html("");
+    input.forEach(function (element) {
+        var start = castTime(parseInt(element.timeStart));
+        var end = castTime(parseInt(element.timeEnd));
+        var template = $([
+            "<div class=\"form-box px-3 py-1 form-margin\">",
+            "  <div class=\"m-1 header-line-left-pink\">",
+            "      <div class=\"m-2\">",
+            "          <h5 class=\"soleto-bold m-0\">" + start + " - " + end + "</h5>\n",
+            "          <p class=\"m-0 soleto-regular\" style=\"\">" + element.equipment + "</p>",
+            "      </div>",
+            "  </div>",
+            "</div>"
+        ].join("\n"));
+        $("#booked-times").append(template);
+    });
 }
 
 function post(url, json) {
@@ -152,4 +201,16 @@ function post(url, json) {
         }
     };
     http.send(json);
+}
+
+// Async http GET request function
+// Found on stackoverflow, thanks <3
+function httpGetAsync(url, callback) {
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.onreadystatechange = function () {
+        if (xmlHttp.readyState === 4 && xmlHttp.status === 200)
+            callback(this.response);
+    };
+    xmlHttp.open("GET", url, true); // true for asynchronous
+    xmlHttp.send(null);
 }

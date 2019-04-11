@@ -44,7 +44,7 @@
                         @foreach($equipment as $index)
     <a class="button" onclick="select(this, '.buttons>.button')" href="#button">
                                 <div class="button-filler magenta-fill"></div>
-                                <span class="soleto-regular" value="{{$index['id']}}"> {{ $index['equipment'] }}</span>
+                                <span class="soleto-regular" value="{{$index['id']}}">{{$index['equipment']}}</span>
                             </a>
                         @endforeach
 </div>
@@ -84,7 +84,7 @@
                                 <a class="button" onclick="select(this, '.date>.button')" href="#today">
                                     <div class="button-filler magenta-fill"></div>
                                     <span class="soleto-regular"
-                                          data-value="<?php echo $today_datetime ?>">Idag (<?php echo $today ?> )</span>
+                                          data-day="0" data-value="<?php echo $today_datetime ?>">Idag (<?php echo $today ?> )</span>
                                 </a>
                             </div>
                         </div>
@@ -97,13 +97,19 @@
                                 <a class="button" onclick="select(this, '.date>.button')" href="#tomorrow">
                                     <div class="button-filler magenta-fill"></div>
                                     <span class="soleto-regular"
-                                          data-value="<?php echo $tomorrow_datetime ?>">Imorgon (<?php echo $tomorrow ?>)</span>
+                                          data-day="1" data-value="<?php echo $tomorrow_datetime ?>">Imorgon (<?php echo $tomorrow ?>)</span>
                                 </a>
                             </div>
                         </div>
                         <div class="col-sm-2">
                         </div>
                     </div>
+                </div>
+
+                <div class="form-box time p-2" id="alreadyBooked">
+                    <h2 class="soleto-regular magenta">REDAN BOKADE TIDER</h2>
+                    <div class="header-line"></div>
+                    <div id="booked-times"></div>
                 </div>
 
                 <div class="header-line"></div>

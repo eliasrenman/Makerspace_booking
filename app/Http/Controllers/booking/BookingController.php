@@ -19,7 +19,6 @@ class BookingController extends Controller
     public function index()
     {
         $user = session()->get('user');
-
         if ($user['teacher']) {
             $equipment = Equipment::all();
         } else {
@@ -36,6 +35,11 @@ class BookingController extends Controller
      */
     public function login()
     {
+        $user = session()->get('user');
+        if (isset($user)) {
+            return redirect('/');
+        }
+
         return view('booking.login');
     }
 
@@ -53,7 +57,6 @@ class BookingController extends Controller
     {
         foreach ($bookingRequest->equipment as $equipment) {
             $local = $bookingRequest->merge(['equipment' => $equipment]);
-
             Bookings::create($local->all());
         }
 
