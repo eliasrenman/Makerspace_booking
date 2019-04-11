@@ -27,15 +27,13 @@ class BookingRequest extends FormRequest
         $this->request->remove('date');
     }
 
-    //TODO Validate here that there are no overlapping bookings and if the user is a teacher let him force a overlap
     public function withValidator($validator)
     {
 
         $validator->after(function ($validator) {
             if (!$this->checkIfExists()) {
-                $validator->errors()->add('bad request', 'Denna bokning existerar inte');
+                $validator->errors()->add('bad request', 'Något gick fel');
             } else if ($this->isTeacher()) {
-                //TODO Create booking edit priveleges for teachers to adjust overlapping time bookings.
                 if (!$this->checkAvailability()) {
                     $this->adjustBookings();
                 }
@@ -66,7 +64,49 @@ class BookingRequest extends FormRequest
 
     private function adjustBookings()
     {
+        //TODO double check that this is in order
+        $start = $this->start;
+        $end = $this->end;
+        foreach ($this->equipment as $equipment) {
 
+            $delete = $this->completeOverlap($start, $end, $equipment);
+            if ($delete->count() != 0) {
+                foreach ($delete->get() as $item) {
+                    $item->delete();
+                }
+            }
+            $adjustBoth = $this->insideOverlap($start, $end, $equipment);
+            if ($adjustBoth->count() != 0) {
+                foreach ($adjustBoth->get() as $item) {
+                    $newBooking = $item->replicate();
+                    $item->end = $start - 1;
+                    $newBooking->start = $end + 1;
+                    $item->save();
+                    Bookings::create([
+                        'name' => $newBooking->name,
+                        'equipment' => $newBooking->equipment,
+                        'start' => $newBooking->start,
+                        'end' => $newBooking->end,
+                    ])->save();
+                }
+            } else {
+                $adjustStart = $this->partialOverlap($start, $equipment);
+                if ($adjustStart->count() != 0) {
+                    foreach ($adjustStart->get() as $item) {
+                        $item->end = $start - 1;
+                        $item->save();
+                    }
+                }
+
+                $adjustEnd = $this->partialOverlap($end, $equipment);
+                if ($adjustEnd->count() != 0) {
+                    foreach ($adjustEnd as $item) {
+                        $item->start = $end + 1;
+                        $item->save();
+                    }
+                }
+            }
+        }
     }
 
     private function isTeacher()
@@ -100,28 +140,56 @@ class BookingRequest extends FormRequest
         return true;
     }
 
+    private function partialOverlap($value, $equipment)
+    {
+        return Bookings::where(function ($query) use ($value, $equipment) {
+            $query
+                ->where(function ($query) use ($value, $equipment) {
+                    $query
+                        ->where('start', '<', $value)
+                        ->where('end', '>', $value)
+                        ->where('equipment', '=', $equipment);
+                });
+        });
+    }
+
+    private function completeOverlap($start, $end, $equipment)
+    {
+        return Bookings::where(function ($query) use ($start, $end, $equipment) {
+            $query
+                ->where(function ($query) use ($start, $end, $equipment) {
+                    $query
+                        ->where('start', '>', $start)
+                        ->where('end', '<', $end)
+                        ->where('equipment', '=', $equipment);
+                });
+        });
+    }
+
+    private function insideOverlap($start, $end, $equipment)
+    {
+        return Bookings::where(function ($query) use ($start, $end, $equipment) {
+            $query
+                ->where(function ($query) use ($start, $end, $equipment) {
+                    $query
+                        ->where('start', '<', $start)
+                        ->where('end', '>', $end)
+                        ->where('equipment', '=', $equipment);
+                });
+        });
+    }
+
     private function checkAvailability()
     {
-
         $start = $this->start;
         $end = $this->end;
         $count = 0;
         foreach ($this->equipment as $equipment) {
-            $count += Bookings::where(function ($query) use ($start, $end, $equipment) {
-                $query
-                    ->where(function ($query) use ($start, $end, $equipment) {
-                        $query
-                            ->where('start', '<', $start)
-                            ->where('end', '>', $start)
-                            ->where('equipment', '=', $equipment);
-                    })
-                    ->orWhere(function ($query) use ($start, $end, $equipment) {
-                        $query
-                            ->where('start', '<', $end)
-                            ->where('end', '>', $end)
-                            ->where('equipment', '=', $equipment);
-                    });
-            })->count();
+
+            $count += $this->partialOverlap($start, $equipment)->count();
+            $count += $this->partialOverlap($end, $equipment)->count();
+            $count += $this->completeOverlap($start, $end, $equipment)->count();
+
         }
         if ($count != 0) return false;
         return true;
