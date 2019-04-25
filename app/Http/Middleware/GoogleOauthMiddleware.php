@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Google_Client;
+use Google_Service_Exception;
 use Google_Service_Plus;
 use Closure;
 
@@ -17,22 +18,27 @@ class GoogleOauthMiddleware
      */
     public function handle($request, Closure $next)
     {
-        $google_client_token = session()->get('google_token');
+        try {
+            $google_client_token = session()->get('google_token');
 
-        if (!isset($google_client_token)) {
-            return redirect('/login');
+            if (!isset($google_client_token)) {
+                return redirect('/logout');
+            }
+
+            $client = new Google_Client();
+            $client->setApplicationName("Makerspace");
+            $client->setDeveloperKey(env('GOOGLE_SERVER_KEY'));
+            $client->setAccessToken(json_encode($google_client_token));
+            $client->addScope("https://www.googleapis.com/auth/userinfo.profile");
+            $client->addScope("https://www.googleapis.com/auth/userinfo.email");
+
+            $this->getMe($client);
+
+            return $next($request);
+        } catch (Google_Service_Exception $exception) {
+            return redirect('/logout');
         }
 
-        $client = new Google_Client();
-        $client->setApplicationName("Makerspace");
-        $client->setDeveloperKey(env('GOOGLE_SERVER_KEY'));
-        $client->setAccessToken(json_encode($google_client_token));
-        $client->addScope("https://www.googleapis.com/auth/userinfo.profile");
-        $client->addScope("https://www.googleapis.com/auth/userinfo.email");
-
-        $this->getMe($client);
-
-        return $next($request);
     }
 
     /**

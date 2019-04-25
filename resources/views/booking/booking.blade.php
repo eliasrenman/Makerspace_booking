@@ -42,7 +42,7 @@
                     <div class="header-line"></div>
                     <div class="buttons">
                         @foreach($equipment as $index)
-    <a class="button" onclick="select(this, '.buttons>.button')" href="#button">
+    <a class="button btn-equipment" onclick="select(this, '.buttons>.button')" href="#button">
                                 <div class="button-filler magenta-fill"></div>
                                 <span class="soleto-regular" value="{{$index['id']}}">{{$index['name']}}</span>
                             </a>

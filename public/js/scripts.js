@@ -1,3 +1,5 @@
+var equipment_selected = 0;
+
 function compareCss(element, css, value) {
     var b = false;
     $(element).each(function () {
@@ -8,7 +10,8 @@ function compareCss(element, css, value) {
 }
 
 function select(button) {
-    //console.log(button);
+    console.log(button);
+
     if (!$(button).hasClass("selected")) {
         $(".button").removeClass("selected");
         $(button).addClass("selected");
@@ -21,8 +24,29 @@ function select(button) {
 
 function select(button, oldButton) {
     //console.log(button);
+
+
     var b = $(button).hasClass("selected");
-    //deselect(oldButton);
+
+    //checks if the button is a equipment button
+    if ($(button).hasClass("btn-equipment")) {
+        //equipment button limit is at 2 and this stops it from
+        // selecting more than two buttons.
+        if (equipment_selected < 2) {
+            if (!b) {
+                equipment_selected++;
+            } else {
+                equipment_selected--;
+            }
+        } else if (equipment_selected === 2 && b) {
+            equipment_selected--;
+        } else
+            return;
+    }
+
+    if (!$(oldButton).hasClass("btn-equipment")) {
+        deselect(oldButton);
+    }
 
     if (b) {
         deselect(button);
