@@ -17,6 +17,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('lookup/{equipment}&{day}', "BookingController@lookup");
+Route::middleware(['cors'])->group(function () {
+    Route::get('lookup/{equipment}&{day}', "BookingController@lookup");
 
-Route::get('booking', "BookingController@booking");
+
+    Route::get('booking', "BookingController@booking");
+});
