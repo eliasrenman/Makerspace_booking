@@ -12,6 +12,6 @@ class Equipment extends Model
      * @var array
      */
     protected $fillable = [
-        'equipment', 'restricted',
+        'name', 'restricted',
     ];
 }

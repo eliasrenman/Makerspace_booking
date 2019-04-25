@@ -1,6 +1,6 @@
 @extends('layout')
 
-@section('title','Login')
+@section('title','Färdigt')
 
 @section('header-title','')
 

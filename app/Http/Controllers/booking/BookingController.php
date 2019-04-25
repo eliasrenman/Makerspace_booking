@@ -22,7 +22,7 @@ class BookingController extends Controller
         if ($user['teacher']) {
             $equipment = Equipment::all();
         } else {
-            $equipment = Equipment::all()->where('restricted',0);
+            $equipment = Equipment::all()->where('restricted', 0);
         }
 
         return view('booking.booking', compact('user', 'equipment'));
@@ -35,8 +35,8 @@ class BookingController extends Controller
      */
     public function login()
     {
-        $user = session()->get('user');
-        if (isset($user)) {
+
+        if (session()->exists('user')) {
             return redirect('/');
         }
 
@@ -45,13 +45,19 @@ class BookingController extends Controller
 
     public function logout()
     {
-        session()->remove('google_token');
+        if (session()->exists('google_token')) {
+            session()->remove('google_token');
+        }
+        if (session()->exists('user')) {
+            session()->remove('user');
+        }
         return redirect('/login');
     }
 
     /**
      * Store a newly created resource in storage.
      * @param BookingRequest $bookingRequest
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
      */
     public function store(BookingRequest $bookingRequest)
     {
@@ -59,9 +65,7 @@ class BookingController extends Controller
             $local = $bookingRequest->merge(['equipment' => $equipment]);
             Bookings::create($local->all());
         }
-
-        $response = Request()->only('start', 'end', 'date');
-        echo "/finished/{$response['start']}&{$response['end']}&{$response['date']}";
-        http_response_code(200);
+        $returnResponse = Request()->only('start', 'end', 'date');
+        return response("/finished/{$returnResponse['start']}&{$returnResponse['end']}&{$returnResponse['date']}");
     }
 }

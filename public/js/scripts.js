@@ -8,7 +8,7 @@ function compareCss(element, css, value) {
 }
 
 function select(button) {
-    console.log(button);
+    //console.log(button);
     if (!$(button).hasClass("selected")) {
         $(".button").removeClass("selected");
         $(button).addClass("selected");
@@ -20,7 +20,7 @@ function select(button) {
 }
 
 function select(button, oldButton) {
-    console.log(button);
+    //console.log(button);
     var b = $(button).hasClass("selected");
     //deselect(oldButton);
 
@@ -96,7 +96,7 @@ function parseTime(timestamp) {
 }
 
 function deselect(button) {
-    console.log(button);
+    //console.log(button);
     $(button).removeClass("selected");
 }
 
@@ -115,31 +115,38 @@ function submitData() {
     json.date = $(".date .button.selected span").data().value.toString();
     json.start = $(".from input").val();
     json.end = $(".to input").val();
-
-
-    console.log(json);
-
     json = jsonToRequestString(json);
 
-    console.log(json);
-    post("/", json);
+    post("", json);
 }
 
 function jsonToRequestString(json) {
     var out = "";
     Object.keys(json).forEach(function (k) {
-        out += k + '=' + json[k] + "&";
+        if (k === "equipment") {
+            //makes it a array if it is equipment input.
+            out += k + '=[' + json[k] + "]&";
+        } else {
+
+            out += k + '=' + json[k] + "&";
+        }
     });
 
     return out;
 }
 
 function drawBookings() {
-    var equipment = $(".equipment .button.selected span").text();
+
     var date = $(".date .button.selected span").data().day.toString();
     //TODO this works with old api but needs to be switched to new url and accept array of equipment ids instead of name
-    var rest = "https://ntig-makerspace.herokuapp.com/?requestEquipmentData&equipment=" + equipment + "&day=" + date;
-    console.log(rest);
+    var equipment = [];
+    $(".equipment .button.selected span").each(function (index, element) {
+        equipment[index] = parseInt(element.getAttribute('value'));
+    });
+
+    var rest = "/api/lookup/" + JSON.stringify(equipment) + "&" + date;
+
+    //console.log(rest);
     //var rest = "http://localhost/?requestEquipmentData&equipment=" + equipment + "&day=" + date;
     rest = rest.replace(" ", "%20");
     httpGetAsync(rest, updateBookings);
@@ -168,14 +175,15 @@ function updateBookings(input) {
     }
     $("#booked-times").html("");
     input.forEach(function (element) {
-        var start = castTime(parseInt(element.timeStart));
-        var end = castTime(parseInt(element.timeEnd));
+        //console.log(input)
+        var start = castTime(parseInt(element.start));
+        var end = castTime(parseInt(element.end));
         var template = $([
             "<div class=\"form-box px-3 py-1 form-margin\">",
             "  <div class=\"m-1 header-line-left-pink\">",
             "      <div class=\"m-2\">",
             "          <h5 class=\"soleto-bold m-0\">" + start + " - " + end + "</h5>\n",
-            "          <p class=\"m-0 soleto-regular\" style=\"\">" + element.equipment + "</p>",
+            "          <p class=\"m-0 soleto-regular\" style=\"\">" + element.name + "</p>",
             "      </div>",
             "  </div>",
             "</div>"
@@ -193,6 +201,7 @@ function post(url, json) {
 
     http.onreadystatechange = function () {//Call a function when the state changes.
         if (this.readyState === 4) {
+            //console.log(this.responseText);
             if (this.status === 200) {
                 window.location.replace(this.responseText);
             } else {
