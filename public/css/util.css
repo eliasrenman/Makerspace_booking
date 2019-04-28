@@ -85,3 +85,18 @@
 .no-padding {
 	padding: 0;
 }
+.form-input {
+	color: #DD0890;
+	border: hidden;
+	border-bottom: 2px solid #DD0890;
+
+}
+.header-line-left-pink {
+	border-left: #DD0890 dotted 2px;
+}
+
+@media (max-width: 575px) {
+	.media-small-hide {
+		display: none !important;
+	}
+}

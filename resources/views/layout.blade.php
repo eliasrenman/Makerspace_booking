@@ -29,7 +29,7 @@
             <div class="header-container">
                 <div class="header-line"></div>
                 <h1 class="soleto-xbold coalgray">@yield('header-title','BOKA TID I MAKERSPACE')</h1>
-                <p class="soleto-light">@yield('header-description',
+                <p class="soleto-light media-small-hide">@yield('header-description',
                 'Makerspace är ett rum för kreativt skapande och skolarbete. Du kan skriva uppgifter, redigera bilder eller göra spel - vad som helst som utvecklar dina förmågor. Till din hjälp finns det datorer, 3D-skrivare och en massa annan utrustning att låna. Det är bara att boka tid och köra!'
                 )</p>
             </div>
