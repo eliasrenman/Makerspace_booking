@@ -11,33 +11,45 @@
 |
 */
 
+//The / Route group.
 Route::prefix('/')->group(function () {
 
-    Route::get('redirect', 'Auth\GoogleOauthController@redirectToProvider');
-    Route::get('callback', 'Auth\GoogleOauthController@handleProviderCallback');
-
+    //Booking store without oauth since its a ajax request.
     Route::post('', 'booking\BookingController@store');
 
+    //Google login and logout Routes.
     Route::get('login', 'booking\BookingController@login');
     Route::get('logout', 'booking\BookingController@logout');
 
+    //Google oauth redirect and callback Routes.
+    Route::get('redirect', 'Auth\GoogleOauthController@redirectToProvider');
+    Route::get('callback', 'Auth\GoogleOauthController@handleProviderCallback');
+
+    //Google auth protected Routes.
     Route::middleware(['oauth'])->group(function () {
 
+        //Booking page Route.
         Route::get('', 'booking\BookingController@index');
 
+        //Finished page Route.
         Route::get('finished/{start}&{end}&{date}', 'booking\DisplayBookingController@finished');
 
+        //error page Route.
+        // Might be removed later in favour of error messages on booking page.
         Route::get('error/{error}', 'booking\DisplayBookingController@error');
 
     });
 
 });
 
-//TODO Add route group for when middleware authentication is set up.
-//Admin
+
+//The /admin Route group.
 Route::prefix('/admin')->group(function () {
 
+    //Admin dashboard page Route.
     Route::get('', 'admin\AdminController@index')->name('home');
+
+    /* Admin authentication routes */
 
     // Authentication Routes.
     Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
@@ -53,4 +65,5 @@ Route::prefix('/admin')->group(function () {
     Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
     Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
     Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('password.update');
+
 });
