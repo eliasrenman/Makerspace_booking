@@ -55,6 +55,10 @@ p {
     width: 20px;
     border-top: #000 dotted 2px;
 }
+.my-30px {
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
 
 .form-box .header-line {
     margin-left: 20px;

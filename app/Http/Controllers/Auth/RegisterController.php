@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Http\Requests\RegisterRequest;
+use App\Traits\Admin\AdminRegistersUsers;
 use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Foundation\Auth\RegistersUsers;
 
-class RegisterController extends Controller
-{
+class RegisterController extends Controller {
+
     /*
     |--------------------------------------------------------------------------
     | Register Controller
@@ -21,14 +21,13 @@ class RegisterController extends Controller
     |
     */
 
-    use RegistersUsers;
-
+    use AdminRegistersUsers;
     /**
      * Where to redirect users after registration.
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/admin/';
 
     /**
      * Create a new controller instance.
@@ -37,36 +36,40 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest');
+        //TODO WARNING CHANGE THIS TO AUTH BEFORE LIVE VERSION!!!!!!
+        //$this->middleware('auth'); //TODO UNCOMMENT IN LIVE VERSION!!
+        $this->middleware('guest'); //TODO COMMENT OUT IN LIVE VERSION!!
+    }
+
+    public function register(RegisterRequest $request)
+    {
+        User::create($request->all());
+        return redirect('/admin');
     }
 
     /**
      * Get a validator for an incoming registration request.
      *
-     * @param  array  $data
+     * @param  array $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
     protected function validator(array $data)
     {
-        return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
+        return $this->validator($data, [
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
+            'password' => ['required', 'string', 'min:8', 'confirmed']
+            ]);
     }
 
     /**
      * Create a new user instance after a valid registration.
      *
-     * @param  array  $data
+     * @param  array $data
      * @return \App\User
      */
-    protected function create(array $data)
+    protected function create($data)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-        ]);
+        //dd($data);
+        return User::create(['email' => $data['email'], 'password' => Hash::make($data['password']),]);
     }
 }

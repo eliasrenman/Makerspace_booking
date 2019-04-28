@@ -18,8 +18,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::middleware(['cors'])->group(function () {
-    Route::get('lookup/{equipment}&{day}', "BookingController@lookup");
 
+    Route::get('lookup/{equipment}&{day}', "BookingController@lookup");
 
     Route::get('booking', "BookingController@booking");
 });

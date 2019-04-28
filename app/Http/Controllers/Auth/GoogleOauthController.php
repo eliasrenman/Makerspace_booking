@@ -44,7 +44,6 @@ class GoogleOauthController extends Controller
 
         session(['google_token' => $client->getAccessToken()]);
 
-        //dd(session()->get('google_token'));
         return redirect()->to('/');
     }
 }

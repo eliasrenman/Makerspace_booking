@@ -1,13 +1,11 @@
 @extends('layout')
 
-@section('title','Admin Dashboard')
+@section('title','Byt lösenord')
 
-@section('header-title','ADMIN-PANEL')
+@section('header-title','BYT LÖSENORD')
 
 @section('header-description')
-    Detta är inloggningsidan för administratörer av makerspace-bookningsystemet. Om
-    du är en vanlig användare och hamnat här av misstag <a href="../">klicka här</a> för att komma
-    tillbaka till startsidan.
+
 @endsection
 @section('stylesheets')
     <link rel="stylesheet" type="text/css" href="/css/index.css">
@@ -20,11 +18,11 @@
             <div class="col-md-2 col-xl-3"></div>
             <div class="main-column col-lg-8 col-xl-7">
 
-                <form id="login-form" method="POST" action="{{ route('register') }}">
+                <form id="login-form" method="POST" action="{{ route('password.update') }}">
 
 
                     <div class="form-box time p-2 open">
-                        <h2 class="soleto-regular magenta">INLOGGNING</h2>
+                        <h2 class="soleto-regular magenta">BYT LÖSENORD</h2>
                         <div class="row">
                             <div class="col">
                                 <div class="header-line m-0"></div>
@@ -32,6 +30,8 @@
                         </div>
 
                         @csrf
+
+                        <input type="hidden" name="token" value="{{ $token }}">
                         <div class="row">
                             <div class="col-md mt-3">
                                 <label for="email" class="d-block">
@@ -52,7 +52,7 @@
 
                             <div class="col-md mt-3 ">
                                 <label for="password"
-                                       class="d-block">Lösenord</label>
+                                       class="d-block">Nytt lösenord</label>
 
                                 <input id="password" type="password" onchange="changeSubmitButton()"
                                        class="w-75 d-block soleto-regular form-input @error('password') is-invalid @enderror"
@@ -82,7 +82,7 @@
                             <div class="col-md-6">
                                 <div class="submit-button" onclick="submitForm()">
                                     <div>
-                                        <span class="soleto-regular magenta">Registrera dig</span>
+                                        <span class="soleto-regular magenta">BYT LÖSENORD</span>
                                         <img src="/images/Ikon%20Nästa.svg">
                                     </div>
                                 </div>
