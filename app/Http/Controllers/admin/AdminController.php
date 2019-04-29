@@ -19,17 +19,12 @@ class AdminController extends Controller
 
     public function index()
     {
-        $equipments = Equipment::all();
-        $latestBookings = $this->getLatestBookings();
-
-        $adminUsers = User::all();
-        $activeUser = Auth::user();
-        return view('admin.dashboard', compact([
-            'equipments',
-            'latestBookings',
-            'adminUsers',
-            'activeUser'
-        ]));
+        return view('admin.dashboard', [
+            'equipments' => Equipment::all(),
+            'latestBookings' => $this->getLatestBookings(),
+            'adminUsers' => User::all(),
+            'activeUser' => Auth::user()
+        ]);
     }
 
     public function destroy($id) {
