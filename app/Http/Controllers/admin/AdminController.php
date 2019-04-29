@@ -23,7 +23,7 @@ class AdminController extends Controller
         $latestBookings = $this->getLatestBookings();
 
         $adminUsers = User::all();
-        $activeUser = Auth::user()->id;
+        $activeUser = Auth::user();
         return view('admin.dashboard', compact([
             'equipments',
             'latestBookings',

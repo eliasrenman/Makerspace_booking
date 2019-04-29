@@ -21,7 +21,7 @@
                     <div class="grid-row row">
                         <div class="col-sm-8 column">
                             <div class="user-info">
-                                <span class="user-name soleto-regular magenta">{{ "Logged in admin user"}}</span>
+                                <span class="user-name soleto-regular magenta">{{ "Inloggad som " . $activeUser['email']}}</span>
                             </div>
                         </div>
 
@@ -72,9 +72,6 @@
                             </div>
                         @endforeach
                     </div>
-
-                    <div id="expand-div-equipment"></div>
-
                     <div>
                         <div class="form-margin">
                             <h5 class="soleto-bold m-0">
@@ -142,7 +139,7 @@
                                     <div class="m-2">
                                         <h5 class="soleto-bold m-0">
                                             {{$user['email']}}
-                                            @if($user['id'] == $activeUser)
+                                            @if($user['id'] == $activeUser['id'])
                                                 (du)
                                             @endif
                                         </h5>
@@ -180,8 +177,6 @@
                         </div>
 
                     </div>
-                    <div id="expand-div-bookings"></div>
-
                     <div>
                         <div class="form-margin">
                             <h5 class="soleto-bold m-0">
