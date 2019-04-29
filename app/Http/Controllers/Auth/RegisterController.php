@@ -36,9 +36,7 @@ class RegisterController extends Controller {
      */
     public function __construct()
     {
-        //TODO WARNING CHANGE THIS TO AUTH BEFORE LIVE VERSION!!!!!!
-        //$this->middleware('auth'); //TODO UNCOMMENT IN LIVE VERSION!!
-        $this->middleware('guest'); //TODO COMMENT OUT IN LIVE VERSION!!
+        $this->middleware('auth');
     }
 
     public function register(RegisterRequest $request)

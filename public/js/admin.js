@@ -52,3 +52,10 @@ function allFieldsFilled() {
     });
     return fieldCount === fields.length;
 }
+
+function deleteAdmin(id) {
+    var bool = confirm('Är du säker på att du vill ta bort denna användare');
+    if (bool) {
+        document.location.replace('/admin/user/' + id + '/delete');
+    }
+}

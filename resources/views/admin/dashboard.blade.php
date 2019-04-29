@@ -64,8 +64,10 @@
                                             @else
                                                 Bokningsbar för alla
                                             @endif
-                                            <a href="{{route('equipment.edit', $equipment['id'])}}"><img src="images/Ikon%20logga-ut.svg"></a>
-                                            <a href="{{route('equipment.destroy', $equipment['id'])}}"><img src="images/Ikon%20logga-ut.svg"></a>
+                                            <a href="{{route('equipment.edit', $equipment['id'])}}"><img
+                                                        src="images/Ikon%20logga-ut.svg"></a>
+                                            <a href="{{route('equipment.destroy', $equipment['id'])}}"><img
+                                                        src="images/Ikon%20logga-ut.svg"></a>
                                         </p>
                                     </div>
                                 </div>
@@ -102,8 +104,7 @@
                                             - {{$booking['end']}}
                                         </h5>
                                         <p class="m-0 soleto-regular" style="">
-                                            {{$booking['name']}}
-                                            , {{$booking['equipment']}}
+                                            {{$booking['name']}}, {{$booking['equipment']}}
                                         </p>
                                     </div>
                                 </div>
@@ -144,8 +145,8 @@
                                             @endif
                                         </h5>
                                         <p class="m-0 soleto-regular">Administratör
-                                            <img src="images/Ikon%20logga-ut.svg">
-                                            <a href="#"><img src="images/Ikon%20logga-ut.svg"></a>
+                                            <img src="/images/Ikon%20logga-ut.svg"
+                                                 onclick="deleteAdmin({{$user['id']}})">
                                         </p>
                                     </div>
                                 </div>
@@ -160,10 +161,12 @@
                             </h5>
                         </div>
                         <div>
-                            <h5 class="soleto-bold m-0">
-                                <img src="https://via.placeholder.com/20.png/" id="">
-                                Exportera bokningar
-                            </h5>
+                            <a href="{{route('register')}}">
+                                <h5 class="soleto-bold m-0">
+                                    <img src="https://via.placeholder.com/20.png/" id="">
+                                    Skapa ny Administratör
+                                </h5>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -174,4 +177,5 @@
     </div>
 @endsection
 @section('scripts')
+    <script src="/js/admin.js"></script>
 @endsection
