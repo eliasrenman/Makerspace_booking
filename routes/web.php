@@ -49,6 +49,13 @@ Route::prefix('/admin')->group(function () {
     //Admin dashboard page Route.
     Route::get('', 'admin\AdminController@index')->name('home');
 
+    Route::get('equipment/{id}/delete', 'admin\Equipmentcontroller@destroy')
+        ->name('equipment.destroy');
+
+    Route::Resource('equipment', 'admin\EquipmentController')
+        ->except(['show', 'destroy']);
+
+
     /* Admin authentication routes */
 
     // Authentication Routes.

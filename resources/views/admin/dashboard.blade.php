@@ -63,10 +63,9 @@
                                                 Lärare endast
                                             @else
                                                 Bokningsbar för alla
-
                                             @endif
-                                            <img src="images/Ikon%20logga-ut.svg">
-                                            <a href=""><img src="images/Ikon%20logga-ut.svg"></a>
+                                            <a href="{{route('equipment.edit', $equipment['id'])}}"><img src="images/Ikon%20logga-ut.svg"></a>
+                                            <a href="{{route('equipment.destroy', $equipment['id'])}}"><img src="images/Ikon%20logga-ut.svg"></a>
                                         </p>
                                     </div>
                                 </div>
@@ -83,12 +82,13 @@
                                 Visa alla
                             </h5>
                         </div>
-                        <div>
+
+                        <a href="{{route('equipment.index')}}">
                             <h5 class="soleto-bold m-0">
                                 <img src="https://via.placeholder.com/20.png/" id="">
                                 Lägg till utrustning
                             </h5>
-                        </div>
+                        </a>
                     </div>
                 </div>
 
@@ -137,22 +137,22 @@
                     <div class="header-line"></div>
                     <div id="small-preview-bookings">
                         @foreach($adminUsers as $user)
-                        <div class="form-box px-3 py-1 form-margin">
-                            <div class="m-1 header-line-left-pink">
-                                <div class="m-2">
-                                    <h5 class="soleto-bold m-0">
-                                        {{$user['email']}}
-                                        @if($user['id'] == $activeUser)
-                                            (du)
-                                        @endif
-                                    </h5>
-                                    <p class="m-0 soleto-regular">Administratör
-                                        <img src="images/Ikon%20logga-ut.svg">
-                                        <a href="#"><img src="images/Ikon%20logga-ut.svg"></a>
-                                    </p>
+                            <div class="form-box px-3 py-1 form-margin">
+                                <div class="m-1 header-line-left-pink">
+                                    <div class="m-2">
+                                        <h5 class="soleto-bold m-0">
+                                            {{$user['email']}}
+                                            @if($user['id'] == $activeUser)
+                                                (du)
+                                            @endif
+                                        </h5>
+                                        <p class="m-0 soleto-regular">Administratör
+                                            <img src="images/Ikon%20logga-ut.svg">
+                                            <a href="#"><img src="images/Ikon%20logga-ut.svg"></a>
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
                         @endforeach
                         <div class="form-box px-3 py-1 form-margin">
                             <div class="m-1 header-line-left-pink">

@@ -32,6 +32,11 @@ class AdminController extends Controller
         ]));
     }
 
+    public function destroy($id) {
+        $user = User::find($id);
+        dd($user);
+    }
+
     private function getLatestBookings()
     {
         return Bookings::query()
