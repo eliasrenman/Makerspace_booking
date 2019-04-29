@@ -86,7 +86,8 @@
 	padding: 0;
 }
 .form-input {
-	color: #DD0890;
+	background-color: transparent !important;
+	color: #DD0890 !important;
 	border: hidden;
 	border-bottom: 2px solid #DD0890;
 

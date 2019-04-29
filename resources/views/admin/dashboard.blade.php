@@ -53,38 +53,25 @@
                     <div class="header-line"></div>
                     <div id="small-preview-equipment">
 
-                        <div class="form-box px-3 py-1 form-margin">
-                            <div class="m-1 header-line-left-pink">
-                                <div class="m-2">
-                                    <p class="m-0 soleto-regular" style="">Dator 1
-                                        <img src="images/Ikon%20logga-ut.svg">
-                                        <img src="images/Ikon%20logga-ut.svg">
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
+                        @foreach($equipments as $equipment)
+                            <div class="form-box px-3 py-1 form-margin">
+                                <div class="m-1 header-line-left-pink">
+                                    <div class="m-2">
+                                        <h5 class="soleto-bold m-0">{{$equipment['name']}}</h5>
+                                        <p class="m-0 soleto-regular" style="">
+                                            @if($equipment['restricted'])
+                                                Lärare endast
+                                            @else
+                                                Bokningsbar för alla
 
-                        <div class="form-box px-3 py-1 form-margin">
-                            <div class="m-1 header-line-left-pink">
-                                <div class="m-2">
-                                    <p class="m-0 soleto-regular" style="">Dator 1
-                                        <img src="images/Ikon%20logga-ut.svg">
-                                        <img src="images/Ikon%20logga-ut.svg">
-                                    </p>
+                                            @endif
+                                            <img src="images/Ikon%20logga-ut.svg">
+                                            <a href=""><img src="images/Ikon%20logga-ut.svg"></a>
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="form-box px-3 py-1 form-margin">
-                            <div class="m-1 header-line-left-pink">
-                                <div class="m-2">
-                                    <p class="m-0 soleto-regular" style="">Dator 1
-                                        <img src="images/Ikon%20logga-ut.svg">
-                                        <img src="images/Ikon%20logga-ut.svg">
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
 
                     <div id="expand-div-equipment"></div>
@@ -109,36 +96,22 @@
                     <h2 class="soleto-regular magenta">BOKNINGSHISTORIK</h2>
                     <div class="header-line"></div>
                     <div id="small-preview-bookings">
-
-                        <div class="form-box px-3 py-1 form-margin">
-                            <div class="m-1 header-line-left-pink">
-                                <div class="m-2">
-                                    <h5 class="soleto-bold m-0">08:00 - 11:20</h5>
-
-                                    <p class="m-0 soleto-regular" style="">Person, Dator 1</p>
+                        @foreach($latestBookings as $booking)
+                            <div class="form-box px-3 py-1 form-margin">
+                                <div class="m-1 header-line-left-pink">
+                                    <div class="m-2">
+                                        <h5 class="soleto-bold m-0">
+                                            {{$booking['date']}} {{$booking['start']}}
+                                            - {{$booking['end']}}
+                                        </h5>
+                                        <p class="m-0 soleto-regular" style="">
+                                            {{$booking['name']}}
+                                            , {{$booking['equipment']}}
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="form-box px-3 py-1 form-margin">
-                            <div class="m-1 header-line-left-pink">
-                                <div class="m-2">
-                                    <h5 class="soleto-bold m-0">08:00 - 11:20</h5>
-
-                                    <p class="m-0 soleto-regular" style="">Person, Dator 3</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-box px-3 py-1 form-margin">
-                            <div class="m-1 header-line-left-pink">
-                                <div class="m-2">
-                                    <h5 class="soleto-bold m-0">08:00 - 11:20</h5>
-
-                                    <p class="m-0 soleto-regular" style="">Person, HTC VIVE</p>
-                                </div>
-                            </div>
-                        </div>
+                        @endforeach
 
                     </div>
                     <div id="expand-div-bookings"></div>
@@ -163,19 +136,24 @@
                     <h2 class="soleto-regular magenta">ADMINISTRATÖR</h2>
                     <div class="header-line"></div>
                     <div id="small-preview-bookings">
-
+                        @foreach($adminUsers as $user)
                         <div class="form-box px-3 py-1 form-margin">
                             <div class="m-1 header-line-left-pink">
                                 <div class="m-2">
-                                    <h5 class="soleto-bold m-0">Admin användare (du)</h5>
+                                    <h5 class="soleto-bold m-0">
+                                        {{$user['email']}}
+                                        @if($user['id'] == $activeUser)
+                                            (du)
+                                        @endif
+                                    </h5>
                                     <p class="m-0 soleto-regular">Administratör
                                         <img src="images/Ikon%20logga-ut.svg">
-                                        <img src="images/Ikon%20logga-ut.svg">
+                                        <a href="#"><img src="images/Ikon%20logga-ut.svg"></a>
                                     </p>
                                 </div>
                             </div>
                         </div>
-
+                        @endforeach
                         <div class="form-box px-3 py-1 form-margin">
                             <div class="m-1 header-line-left-pink">
                                 <div class="m-2">
