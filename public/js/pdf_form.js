@@ -1,3 +1,4 @@
+setSelected();
 function select(button) {
     console.log(button);
 

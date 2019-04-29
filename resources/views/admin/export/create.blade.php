@@ -34,28 +34,20 @@
                                     <span class="soleto-regular" value="{{$index['id']}}">{{$index['name']}}</span>
                                 </a>
                             @endforeach
-                            <input id="equipment" name="equipment" class="d-none" value="">
+                            <input id="equipment" name="equipment" class="d-none">
                         </div>
                         <div class="form-box px-3 py-1 form-margin">
                             <div class="m-1 header-line-left-pink">
                                 <div class="m-2">
-                                    <label for="name" class="d-block">
-                                        Efterfrågad person
-                                    </label>
+                                    <h5 for="name" class="soleto-bold d-block">Specifik person</h5>
                                     <input id="name" onchange="changeSubmitButton()"
-                                           class="w-75  d-block soleto-regular form-input @error('name') is-invalid @enderror"
+                                           class="w-75  d-block soleto-regular form-input"
                                            name="name" value="{{ old('email') }}" required autofocus>
-
-                                    @error('name')
-                                    <span class="" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                    @enderror
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="header-line"></div>
+                    <div class="header-line my-30px"></div>
                     <p class="soleto-light magenta error-message"></p>
                     <a class="submit-button enabled" onclick="submitForm()">
                         <div>

@@ -82,6 +82,11 @@
 }
 
 /* General Classes */
+.my-30px {
+	margin-top: 30px;
+	margin-bottom: 30px;
+}
+
 .no-padding {
 	padding: 0;
 }
