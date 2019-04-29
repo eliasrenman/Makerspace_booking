@@ -21,7 +21,7 @@ class EquipmentController extends Controller
      */
     public function index()
     {
-        dd("OwO");
+        return view('admin.equipment.create');
     }
 
     /**
@@ -32,7 +32,7 @@ class EquipmentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        dd($request);
     }
 
     /**
