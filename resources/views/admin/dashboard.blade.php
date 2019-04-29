@@ -120,12 +120,12 @@
                                 Visa alla
                             </h5>
                         </div>
-                        <div>
+                        <a href="{{route('pdf.export')}}">
                             <h5 class="soleto-bold m-0">
                                 <img src="https://via.placeholder.com/20.png/" id="">
                                 Exportera bokningar
                             </h5>
-                        </div>
+                        </a>
                     </div>
                 </div>
 

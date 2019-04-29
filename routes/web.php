@@ -49,13 +49,17 @@ Route::prefix('/admin')->group(function () {
     //Admin dashboard page Route.
     Route::get('', 'admin\AdminController@index')->name('home');
 
-    Route::get('equipment/{id}/delete', 'admin\Equipmentcontroller@destroy')
+    //Admin equipment crud Routes.
+
+    Route::get('/equipment/{id}/delete', 'admin\Equipmentcontroller@destroy')
         ->name('equipment.destroy');
 
-    Route::Resource('equipment', 'admin\EquipmentController')
+    Route::Resource('/equipment', 'admin\EquipmentController')
         ->except(['show', 'destroy']);
 
-
+    //
+    Route::get('/export', 'admin\PdfExportController@index')->name('pdf.export');
+    Route::post('/export', 'admin\PdfExportController@exportPDF');
     /* Admin authentication routes */
 
     // Authentication Routes.
