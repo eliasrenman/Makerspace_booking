@@ -151,31 +151,6 @@
                                 </div>
                             </div>
                         @endforeach
-                        <div class="form-box px-3 py-1 form-margin">
-                            <div class="m-1 header-line-left-pink">
-                                <div class="m-2">
-                                    <h5 class="soleto-bold m-0">Admin användare</h5>
-                                    <p class="m-0 soleto-regular">Administratör
-                                        <img src="images/Ikon%20logga-ut.svg">
-                                        <img src="images/Ikon%20logga-ut.svg">
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-box px-3 py-1 form-margin">
-                            <div class="m-1 header-line-left-pink">
-                                <div class="m-2">
-                                    <h5 class="soleto-bold m-0">Admin användare</h5>
-                                    <p class="m-0 soleto-regular">Administratör
-                                        <img src="images/Ikon%20logga-ut.svg">
-                                        <img src="images/Ikon%20logga-ut.svg">
-                                    </p>
-
-                                </div>
-                            </div>
-                        </div>
-
                     </div>
                     <div>
                         <div class="form-margin">

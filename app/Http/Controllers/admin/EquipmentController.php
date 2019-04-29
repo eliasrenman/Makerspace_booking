@@ -4,10 +4,15 @@ namespace App\Http\Controllers\admin;
 
 use App\Equipment;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Http\Requests\EquipmentRequest;
 
 class EquipmentController extends Controller
 {
+
+    /**
+     * EquipmentController constructor.
+     * Authentication protected
+     */
     public function __construct()
     {
         $this->middleware('auth');
@@ -30,9 +35,10 @@ class EquipmentController extends Controller
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(EquipmentRequest $request)
     {
-        dd($request);
+        Equipment::create($request->all());
+        return redirect(route('home'));
     }
 
     /**
@@ -43,7 +49,8 @@ class EquipmentController extends Controller
      */
     public function edit($id)
     {
-        dd(Equipment::find($id));
+        $equipment = Equipment::find($id);
+        return view('admin.equipment.edit', compact('equipment'));
     }
 
     /**
@@ -53,9 +60,10 @@ class EquipmentController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(EquipmentRequest $request, $id)
     {
-        //
+        Equipment::find($id)->update($request->all());
+        return redirect(route('home'));
     }
 
     /**
@@ -66,7 +74,7 @@ class EquipmentController extends Controller
      */
     public function destroy($id)
     {
-        dd(['to_delete' => Equipment::find($id)]);
-        return back();
+        Equipment::destroy($id);
+        return redirect(route('home'));
     }
 }

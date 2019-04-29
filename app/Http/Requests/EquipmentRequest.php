@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class EquipmentRequest extends FormRequest
 {
@@ -13,7 +14,7 @@ class EquipmentRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,6 +24,8 @@ class EquipmentRequest extends FormRequest
      */
     public function rules()
     {
-        return ['email' => ['required', 'string', 'email', 'max:255', 'unique:users'], 'password' => ['required', 'string', 'min:8', 'confirmed']];
+        return [
+            'name' => ['required', 'string', 'max:12', Rule::unique('equipment')->ignore($this->equipment)],
+            'restricted' => ['required', 'boolean']];
     }
 }

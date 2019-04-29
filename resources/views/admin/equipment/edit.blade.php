@@ -18,8 +18,8 @@
             <div class="col-md-2 col-xl-3"></div>
             <div class="main-column col-lg-8 col-xl-7">
 
-                <form id="login-form" method="POST" action="{{ route('equipment.store') }}">
-
+                <form id="login-form" method="POST" action="{{ route('equipment.update', $equipment['id'])}}">
+                    @method('patch')
 
                     <div class="form-box time p-2 open">
                         <h2 class="soleto-regular magenta">UTRUSTNING</h2>
@@ -37,7 +37,13 @@
                                 </label>
                                 <input id="name" onchange="changeSubmitButton()"
                                        class="w-75  d-block soleto-regular form-input @error('name') is-invalid @enderror"
-                                       name="name" value="{{ old('name') }}" required autofocus>
+                                       name="name"
+                                       @if((old('name')) == true)
+                                       value="{{old('name')}}"
+                                       @else
+                                       value="{{$equipment['name']}}"
+                                       @endif
+                                       required autofocus>
 
                                 @error('name')
                                 <span class="" role="alert">
@@ -53,11 +59,15 @@
                                        class="d-block">Tillgänglighet</label>
 
                                 <select id="availability" onchange="changeSubmitButton()"
-                                       class="w-75 d-block soleto-regular form-input @error('password') is-invalid @enderror"
-                                       name="restricted"
-                                       required>
-                                    <option value="0">Bokningsbar för alla</option>
-                                    <option value="1">Lärare endast</option>
+                                        class="w-75 d-block soleto-regular form-input @error('password') is-invalid @enderror"
+                                        name="restricted"
+                                        required>
+                                    <option value="0" selected="@if($equipment['restricted'] == 0)selected@else @endif">
+                                        Bokningsbar för alla
+                                    </option>
+                                    <option value="1" selected="@if($equipment['restricted'] == 1)selected@else @endif">
+                                        Lärare endast
+                                    </option>
                                 </select>
 
                                 @error('restricted')
