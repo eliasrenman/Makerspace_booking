@@ -21,12 +21,12 @@ Roadmap
 * ~~Login and logout system~~
 * ~~Rest api för att hämta alla relevanta bokningar~~
 * ~~Rest api för att hämta specifika bokningar~~
-* Admin panelsidan (front-end)
+* ~~Admin panelsidan (front-end)~~
 * Första användartest för att reda ut front-end och identifiera buggar / missade feature
-* Åtgärda buggar / missade features
-* Admin loginsida
-* Admin loginsystem
-* Admin panelsida (funktionalitet, back-end)
+* ~~Åtgärda buggar / missade features~~
+* ~~Admin loginsida~~
+* ~~Admin loginsystem~~
+* ~~Admin panelsida (funktionalitet, back-end)~~
 * Användartest
 * Live deploy
 
