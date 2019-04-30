@@ -1,8 +1,8 @@
 @extends('layout')
 
-@section('title','Admin Dashboard')
+@section('title','Admin registrering')
 
-@section('header-title','ADMIN-PANEL')
+@section('header-title','REGISTRERA')
 
 @section('header-description')
     <a href="{{route('home')}}">klicka här för att återvända </a> till admin-panelen.

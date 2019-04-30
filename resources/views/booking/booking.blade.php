@@ -1,6 +1,6 @@
 @extends('layout')
 
-@section('title','Makerspace Bokning')
+@section('title','Bokning')
 
 @section('stylesheets')
     <link rel="stylesheet" type="text/css" href="css/index.css">

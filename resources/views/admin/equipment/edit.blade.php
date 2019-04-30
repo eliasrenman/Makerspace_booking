@@ -1,6 +1,6 @@
 @extends('layout')
 
-@section('title','Admin Login')
+@section('title','Redigera utrustning')
 
 @section('header-title','REDIGERA-UTRUSTNING')
 
