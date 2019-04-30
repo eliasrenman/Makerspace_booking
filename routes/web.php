@@ -19,7 +19,7 @@ Route::prefix('/')->group(function () {
 
     //Google login and logout Routes.
     Route::get('login', 'booking\BookingController@login');
-    Route::get('logout', 'booking\BookingController@logout');
+    Route::get('logout', 'booking\BookingController@logout')->name('booking.logout');
 
     //Google oauth redirect and callback Routes.
     Route::get('redirect', 'Auth\GoogleOauthController@redirectToProvider');

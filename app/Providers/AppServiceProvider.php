@@ -28,5 +28,6 @@ class AppServiceProvider extends ServiceProvider
     {
         Schema::defaultStringLength(191);
         date_default_timezone_set('Europe/Stockholm');
+        setlocale(LC_ALL, array('sv_SE.UTF-8', 'sv_SE@euro', 'sv_SE', 'swedish'));
     }
 }

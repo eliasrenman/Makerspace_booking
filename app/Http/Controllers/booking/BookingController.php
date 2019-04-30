@@ -25,7 +25,17 @@ class BookingController extends Controller
             $equipment = Equipment::all()->where('restricted', 0);
         }
 
-        return view('booking.booking', compact('user', 'equipment'));
+        $datetime = [
+            'today' => [
+                'date' => strftime("%Y-%m-%d", strtotime("today")),
+                'readable' => strftime("%#d %B", strtotime("today")),
+            ],
+            'tomorrow' => [
+                'date' => strftime("%Y-%m-%d", strtotime("tomorrow")),
+                'readable' => strftime("%#d %B", strtotime("tomorrow")),
+            ]
+        ];
+        return view('booking.booking', compact(['user', 'equipment', 'datetime']));
     }
 
     /**

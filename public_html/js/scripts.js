@@ -86,8 +86,8 @@ function checkRequired() {
 
     var minTime = parseTime("8:00");
     var maxTime = parseTime("16:00");
-    var fromTime = parseTime($(".from input[type='time']").val());
-    var toTime = parseTime($(".to input[type='time']").val());
+    var fromTime = parseTime($("#from input[type='time']").val());
+    var toTime = parseTime($("#to input[type='time']").val());
 
     var validFromTime = (fromTime >= minTime && fromTime <= maxTime);
     var validToTime = (toTime >= minTime && toTime <= maxTime);

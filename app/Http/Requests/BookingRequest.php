@@ -197,7 +197,7 @@ class BookingRequest extends FormRequest
 
     private function castTime($time, $date)
     {
-        date_default_timezone_set('Europe/Stockholm');
+        //date_default_timezone_set('Europe/Stockholm');
         return (strtotime($date . "T" . $time));
     }
 

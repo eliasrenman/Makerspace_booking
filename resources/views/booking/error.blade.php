@@ -39,7 +39,7 @@
         </div>
     </div>
 
-    @include('modal', [
+    @include('components.modal', [
     'modal_title' => $error['title'],
     'modal_id' => 'error-modal',
     'modal_content' => $error['modal-content']
