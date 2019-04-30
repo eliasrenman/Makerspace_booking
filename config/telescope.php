@@ -29,7 +29,7 @@ return [
     |
     */
 
-    'path' => 'telescope',
+    'path' => 'admin/telescope',
 
     /*
     |--------------------------------------------------------------------------
@@ -76,6 +76,7 @@ return [
 
     'middleware' => [
         'web',
+        'auth',
         Authorize::class,
     ],
 
