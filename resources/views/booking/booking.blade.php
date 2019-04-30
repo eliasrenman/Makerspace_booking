@@ -12,31 +12,25 @@
         <div class="main-row row">
             <div class="col-md-2 col-xl-3"></div>
             <div class="main-column col-lg-8 col-xl-7">
-                @component('components.userfield')
+                @component('components.fields.userfield')
                     @slot('title', 'Bokar tid för')
-                    @slot('user')
-                        <div class="user-info">
-                            <img src="{{ $user['icon'] }}" class="user-image">
-                            <span class="user-name soleto-regular magenta">{{ $user['name']}}</span>
-                        </div>
-                    @endslot
+                    @slot('image', $user['icon'])
+                    @slot('name', $user['name'])
                     @slot('logout_route', route('booking.logout'))
-
                 @endcomponent
+
                 @csrf
-                @component('components.box')
+                @component('components.box.box')
                     @slot('title','UTRUSTNING')
-                    <div class="buttons">
-                        @foreach($equipment as $index)
-                            <a class="button btn-equipment" onclick="select(this, '.buttons>.button')" href="#button">
-                                <div class="button-filler magenta-fill"></div>
-                                <span class="soleto-regular" value="{{$index['id']}}">{{$index['name']}}</span>
-                            </a>
-                        @endforeach
-                    </div>
+                    @slot('div_class', 'buttons')
+                    @foreach($equipment as $index)
+                        @component('components.buttons.equipmentbutton')
+                            @slot('index', $index)
+                        @endcomponent
+                    @endforeach
                 @endcomponent
 
-                @component('components.box')
+                @component('components.box.box')
                     @slot('title','TID OCH DATUM')
                     @slot('class', 'time')
                     <div class="row">
@@ -66,7 +60,7 @@
                     </div>
                 @endcomponent
 
-                @component('components.box')
+                @component('components.box.box')
                     @slot('title', 'REDAN BOKADE TIDER')
                     @slot('class','time p-2')
                     @slot('id', 'alreadyBooked')

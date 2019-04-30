@@ -6,7 +6,7 @@
 @endsection
 
 @section('content')
-    <div class="login-container">
+    <div class="mt-50px">
         <div class="main-row row">
             <div class="col-md-2 col-xl-3"></div>
             <div class="main-column col-lg-8 col-xl-6">

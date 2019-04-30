@@ -15,59 +15,33 @@
 @endsection
 
 @section('content')
+
     <div class="form-container">
         <div class="main-row row">
             <div class="col-md-2 col-xl-3"></div>
             <div class="main-column col-lg-8 col-xl-7">
 
                 <form id="login-form" method="POST" action="{{ route('login') }}">
+                    @csrf
 
+                    @component('components.box.box')
+                        @slot('title', 'INLOGGNING')
 
-                    <div class="form-box time p-2 open">
-                        <h2 class="soleto-regular magenta">INLOGGNING</h2>
-                        <div class="row">
-                            <div class="col">
-                                <div class="header-line m-0"></div>
-                            </div>
-                        </div>
+                        @component('components.inputfield.inputfield')
+                            @slot('row_class', 'm-0')
+                            @slot('type', 'email')
+                            @slot('submit_name', 'email')
+                            @slot('title', 'E-mail')
+                        @endcomponent
 
-                        @csrf
-                        <div class="row">
-                            <div class="col-md mt-3">
-                                <label for="email" class="d-block">
-                                    E-post
-                                </label>
-                                <input id="email" type="email" onchange="changeSubmitButton()"
-                                       class="w-75  d-block soleto-regular form-input @error('email') is-invalid @enderror"
-                                       name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                        @component('components.inputfield.inputfield')
+                            @slot('row_class', 'm-0')
+                            @slot('type', 'password')
+                            @slot('submit_name', 'password')
+                            @slot('title', 'Lösenord')
+                        @endcomponent
 
-                                @error('email')
-                                <span class="" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="row">
-
-                            <div class="col-md mt-3 ">
-                                <label for="password"
-                                       class="d-block">Lösenord</label>
-
-                                <input id="password" type="password" onchange="changeSubmitButton()"
-                                       class="w-75 d-block soleto-regular form-input @error('password') is-invalid @enderror"
-                                       name="password"
-                                       required autocomplete="current-password">
-
-                                @error('password')
-                                <span class="" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="row mt-3">
+                        <div class="row m-0 mt-3">
                             <div class="col">
                                 @if (Route::has('password.request'))
                                     <a class="p-0 btn btn-link" href="{{ route('password.request') }}">
@@ -76,7 +50,7 @@
                                 @endif
                             </div>
                         </div>
-                        <div class="row mt-3 mb-2">
+                        <div class="row mt-3 m-0 mb-2">
                             <div class="col-md-6 order-md-last mb-3 mb-md-0">
                                 <div class="confirmation position-relative" style="top: 23%">
                                     <div onclick="select(this)" class="radio {{ old('remember') ? 'selected' : '' }}">
@@ -89,15 +63,14 @@
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <div class="submit-button" onclick="submitForm()">
-                                    <div>
-                                        <span class="soleto-regular magenta">LOGGA IN</span>
-                                        <img src="/images/Ikon%20Nästa.svg">
-                                    </div>
-                                </div>
+                                @component('components.buttons.submitbutton')
+                                    @slot('onclick', 'submitForm()')
+                                    @slot('title', 'LOGGA IN')
+                                @endcomponent
                             </div>
                         </div>
-                    </div>
+
+                    @endcomponent
                 </form>
                 <div class="col-md-2 col-xl-2"></div>
             </div>

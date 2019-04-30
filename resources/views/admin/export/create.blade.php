@@ -22,39 +22,30 @@
                 </div>
                 <form id="form" method="post">
                     @csrf
+                    @component('components.box.box')
+                        @slot('title','UTRUSTNING')
+                        @slot('div_class', 'buttons')
+                        @foreach($equipment as $index)
+                            @component('components.buttons.equipmentbutton')
+                                @slot('index', $index)
+                                <input id="equipment" name="equipment" class="d-none">
+                            @endcomponent
+                        @endforeach
 
-                    <div class="form-box equipment pb-2">
-                        <h2 class="soleto-regular magenta">UTRUSTNING</h2>
-                        <div class="header-line"></div>
-                        <div class="buttons">
-                            @foreach($equipment as $index)
-                                <a class="button btn-equipment" onclick="select(this, '.buttons>.button')"
-                                   href="#button">
-                                    <div class="button-filler magenta-fill"></div>
-                                    <span class="soleto-regular" value="{{$index['id']}}">{{$index['name']}}</span>
-                                </a>
-                            @endforeach
-                            <input id="equipment" name="equipment" class="d-none">
-                        </div>
-                        <div class="form-box px-3 py-1 form-margin">
-                            <div class="m-1 header-line-left-pink">
-                                <div class="m-2">
-                                    <h5 for="name" class="soleto-bold d-block">Specifik person</h5>
-                                    <input id="name" onchange="changeSubmitButton()"
-                                           class="w-75  d-block soleto-regular form-input"
-                                           name="name" value="{{ old('email') }}" required autofocus>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                        @component('components.boxitem.boxitem')
+                            @slot('class', 'm-0 mt-3 mb-2')
+                            @slot('title', 'Specifik person')
+                            <input id="name" onchange="changeSubmitButton()"
+                                   class="w-75  d-block soleto-regular form-input"
+                                   name="name" value="" required autofocus>
+                        @endcomponent
+                    @endcomponent
                     <div class="header-line my-30px"></div>
-                    <p class="soleto-light magenta error-message"></p>
-                    <a class="submit-button enabled" onclick="submitForm()">
-                        <div>
-                            <span class="soleto-regular magenta ">LADDA NER</span>
-                            <img src="/images/Ikon%20Nästa.svg">
-                        </div>
-                    </a>
+                    @component('components.buttons.submitbutton')
+                        @slot('class', 'enabled')
+                        @slot('onclick', 'submitForm()')
+                        @slot('title', 'LADDA NER')
+                    @endcomponent
                 </form>
             </div>
 
