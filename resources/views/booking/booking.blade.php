@@ -22,7 +22,7 @@
                 @csrf
                 @component('components.box.box')
                     @slot('title','UTRUSTNING')
-                    @slot('div_class', 'buttons')
+                    @slot('div_class', 'buttons equipment')
                     @foreach($equipment as $index)
                         @component('components.buttons.equipmentbutton')
                             @slot('index', $index)

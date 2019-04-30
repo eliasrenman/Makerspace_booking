@@ -130,15 +130,13 @@ function submitData() {
     //json.author = $(".user-name").text();
     //console.log($(".equipment .button.selected span").text());
     json['_token'] = $('input[name^=_token]')[0].value;
-    //var token = $('input[name^=_token]')[0].value;
     json.equipment = [];
     $(".equipment .button.selected span").each(function (index, element) {
         json.equipment[index] = (element.getAttribute('value'));
     });
-    //json.equipment = [0].getAttribute('value');
     json.date = $(".date .button.selected span").data().value.toString();
-    json.start = $(".from input").val();
-    json.end = $(".to input").val();
+    json.start = $("#from input").val();
+    json.end = $("#to input").val();
     json = jsonToRequestString(json);
 
     post("", json);
@@ -151,27 +149,21 @@ function jsonToRequestString(json) {
             //makes it a array if it is equipment input.
             out += k + '=[' + json[k] + "]&";
         } else {
-
             out += k + '=' + json[k] + "&";
         }
     });
-
     return out;
 }
 
 function drawBookings() {
 
     var date = $(".date .button.selected span").data().day.toString();
-    //TODO this works with old api but needs to be switched to new url and accept array of equipment ids instead of name
     var equipment = [];
     $(".equipment .button.selected span").each(function (index, element) {
         equipment[index] = parseInt(element.getAttribute('value'));
     });
 
     var rest = "/api/lookup/" + JSON.stringify(equipment) + "&" + date;
-
-    //console.log(rest);
-    //var rest = "http://localhost/?requestEquipmentData&equipment=" + equipment + "&day=" + date;
     rest = rest.replace(" ", "%20");
     httpGetAsync(rest, updateBookings);
 }
