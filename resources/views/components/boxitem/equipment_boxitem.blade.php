@@ -6,8 +6,11 @@
     @else
         Bokningsbar för alla
     @endif
-    <a href="{{route('equipment.edit', $equipment['id'])}}"><img
-                src="/images/Ikon%20logga-ut.svg"></a>
-    <a href="{{route('equipment.destroy', $equipment['id'])}}"><img
-                src="/images/Ikon%20logga-ut.svg"></a>
+    <span class="position-relative float-right item-buttons">
+        <a class="item-buttons" href="{{route('equipment.edit', $equipment['id'])}}"><img
+            src="/images/Ikon%20Redigera.svg"></a>
+        <a href="{{route('equipment.destroy', $equipment['id'])}}"><img
+                    src="/images/Ikon%20Delete.svg"></a>
+    </span>
+
 @endcomponent

@@ -42,6 +42,7 @@
                         @endcomponent
                     @endforeach
                     @slot('add_button_route', route('equipment.index'))
+
                     @slot('add_button', 'Lägg till utrustning')
 
                 @endcomponent
@@ -56,6 +57,7 @@
                     @endforeach
 
                     @slot('add_button_route', route('pdf.export'))
+                    @slot('add_button_img', '/images/Ikon Exportera.svg')
                     @slot('add_button', 'Exportera bokningar')
 
                 @endcomponent
@@ -72,6 +74,7 @@
                     @endforeach
 
                     @slot('add_button_route', route('register'))
+                    @slot('add_button_img', '/images/Ikon Person-plus.svg')
                     @slot('add_button', 'Skapa ny Administratör')
 
                 @endcomponent

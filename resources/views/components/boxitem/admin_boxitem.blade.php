@@ -5,8 +5,7 @@
             (du)
         @endif
     @endslot
-    <p class="m-0 soleto-regular">Administratör
-        <img src="/images/Ikon%20logga-ut.svg"
-             onclick="deleteAdmin({{$user['id']}})">
-    </p>
+    Administratör
+    <img class="float-right position-relative item-buttons" src="/images/Ikon%20Delete.svg"
+         onclick="deleteAdmin({{$user['id']}})">
 @endcomponent

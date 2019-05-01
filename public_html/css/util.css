@@ -70,7 +70,9 @@
 .gray-fill {
 	background: #AAAAAA;
 }
-
+.black {
+	color: #212529;
+}
 /* micro clearfix */
 .cf:before,
 .cf:after {
@@ -105,4 +107,8 @@
 	.media-small-hide {
 		display: none !important;
 	}
+}
+
+.item-buttons {
+	top: -10px;
 }
