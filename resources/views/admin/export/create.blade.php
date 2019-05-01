@@ -24,7 +24,7 @@
                     @csrf
                     @component('components.box.box')
                         @slot('title','UTRUSTNING')
-                        @slot('div_class', 'buttons')
+                        @slot('div_class', 'buttons equipment')
                         @foreach($equipment as $index)
                             @component('components.buttons.equipmentbutton')
                                 @slot('index', $index)
@@ -40,6 +40,7 @@
                                    name="name" value="" required autofocus>
                         @endcomponent
                     @endcomponent
+
                     <div class="header-line my-30px"></div>
                     @component('components.buttons.submitbutton')
                         @slot('class', 'enabled')
@@ -55,6 +56,5 @@
 @endsection
 
 @section('scripts')
-
     <script src="/js/pdf_form.js"></script>
 @endsection
