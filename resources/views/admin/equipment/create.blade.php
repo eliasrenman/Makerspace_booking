@@ -1,6 +1,6 @@
 @extends('layout')
 
-@section('title','NY UTRUSTNING')
+@section('title','Ny utrustning')
 
 @section('header-title','LÄGG-TILL-UTRUSTNING')
 
