@@ -14,6 +14,11 @@
 //The / Route group.
 Route::prefix('/')->group(function () {
 
+    //botch implementation of front-screen api
+    Route::get('front-screen', function () {
+        return view('screen.screen');
+    });
+
     //Booking store without oauth since its a ajax request.
     Route::post('', 'booking\BookingController@store');
 
@@ -80,3 +85,5 @@ Route::prefix('/admin')->group(function () {
     Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('password.update');
 
 });
+
+
