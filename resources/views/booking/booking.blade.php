@@ -88,9 +88,31 @@
         </div>
     </div>
     @component('components.modal')
-        @slot('id','terms-modal')
-        @slot('title', 'terms title')
-        <p>Terms Testing</p>
+        @slot('id', 'terms-modal')
+        @slot('title', 'Regler och Riktlinjer')
+        <p>
+            Makerspace är ett rum som designats för bland annat elevaktiv undervisning och kreativt arbete. För att
+            hålla ordning finns det villkor som du måste följa när du använder Makerspace.
+        <h2 class="soleto-xbold">Prioriteringar</h2>
+        <br>
+        <h3 class="soleto-bold">1. Undervisning</h3>
+        Lektioner och skoluppgifter går före allt annat, inklusive andra bokade tider.
+        <br>
+        <h3 class="soleto-bold">2. Lärande</h3>
+        Makerspace är fyllt av nya saker som alla ska ha en möjlighet att testa och lära sig använda.
+        <h3 class="soleto-bold">3. Skapande</h3>
+        Har du nåt du vill tillverka, designa, spela in eller skriva ut? Varsågod att börja!
+        <h3 class="soleto-bold">4. Lek</h3>
+        Ibland, men bara ibland, kan man använda Makerspace helt enkelt för att roa sig.
+        <br><br>
+        <h2 class="soleto-xbold">Regler</h2>
+        1. Ha ingen mat och dryck i ytan<br>
+        2. Ställ i ordning efter dig<br>
+        3. Flytta inte stolar utanför ytan<br>
+        4. Håll ytan lugn för studier och kreativt arbete<br>
+        5. Stör ingen med ljud från datorn<br>
+        6. Var rädd om utrustningen<br>
+        </p>
     @endcomponent
 
     @component('components.modal')
