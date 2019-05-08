@@ -19,6 +19,7 @@
             <div class="main-column col-lg-8 col-xl-7">
                 @component('components.fields.logoutfield')
                     @slot('title', 'Inloggad som')
+
                     @slot('name', $activeUser['email'])
                     @slot('onclick')
                         event.preventDefault();
@@ -36,6 +37,7 @@
                 @component('components.box.expandbox')
 
                     @slot('title','UTRUSTNING')
+                    @slot('id', 'equipment')
                     @foreach($equipments as $equipment)
                         @component('components.boxitem.equipment_boxitem')
                             @slot('equipment' , $equipment)
@@ -50,6 +52,7 @@
                 @component('components.box.expandbox')
 
                     @slot('title','BOKNINGSHISTORIK')
+                    @slot('id', 'history')
                     @foreach($latestBookings as $booking)
                         @component('components.boxitem.bookinghistory_boxitem')
                             @slot('booking', $booking)
@@ -66,6 +69,7 @@
                 @component('components.box.expandbox')
 
                     @slot('title','ADMINISTRATÖR')
+                    @slot('id', 'admins')
                     @foreach($adminUsers as $user)
                         @component('components.boxitem.admin_boxitem')
                             @slot('user', $user)
@@ -85,5 +89,6 @@
     </div>
 @endsection
 @section('scripts')
+    <script src="/js/JQueryRotate.js"></script>
     <script src="/js/admin.js"></script>
 @endsection

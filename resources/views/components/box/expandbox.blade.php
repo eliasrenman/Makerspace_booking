@@ -1,11 +1,14 @@
 @component('components.box.box')
     @slot('title',$title)
-    {{$slot}}
+    <div class="expand-box" id="{{$id}}" >
+        {{$slot}}
+    </div>
+
 
     <div class="row m-0">
         <div class="col-md form-margin mx-0">
-            <h5 class="soleto-bold m-0">
-                <img src="/images/Ikon Pil-ner.svg" id="">
+            <h5 class="soleto-bold m-0" onclick="expandContent({{$id}})">
+                <img src="/images/Ikon Pil-ner.svg">
                 {{$expans ?? 'Visa alla'}}
             </h5>
         </div>

@@ -23,11 +23,21 @@
                 @component('components.box.box')
                     @slot('title','UTRUSTNING')
                     @slot('div_class', 'buttons equipment')
-                    @foreach($equipment as $index)
-                        @component('components.buttons.equipmentbutton')
-                            @slot('index', $index)
-                        @endcomponent
-                    @endforeach
+                    <div class="expand-box" id="equipment">
+                        @foreach($equipment as $index)
+                            @component('components.buttons.equipmentbutton')
+                                @slot('index', $index)
+                            @endcomponent
+                        @endforeach
+                    </div>
+                    <div class="row m-0 hide-md-up">
+                        <div class="col-md form-margin mx-0">
+                            <h5 class="soleto-bold m-0" onclick="expandContent($('#equipment'))">
+                                <img src="/images/Ikon Pil-ner.svg">
+                                Visa alla
+                            </h5>
+                        </div>
+                    </div>
                 @endcomponent
 
                 @component('components.box.box')
