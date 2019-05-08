@@ -4,7 +4,7 @@
             <div class="button-filler magenta-fill"></div>
             <span class="soleto-regular"
                   data-day="{{isset($day_name) ? '1': '0'}}"
-                  data-value="{{$datetime['date']}}">{{$dayname ?? 'Idag'}} ({{$datetime['readable']}})</span>
+                  data-value="{{$datetime['date']}}">{{$day_name ?? 'Idag'}} ({{$datetime['readable']}})</span>
         </a>
     </div>
 </div>
