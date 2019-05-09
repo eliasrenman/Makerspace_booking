@@ -22,8 +22,7 @@
                 @csrf
                 @component('components.box.box')
                     @slot('title','UTRUSTNING')
-                    @slot('div_class', 'buttons equipment')
-                    <div class="expand-box" id="equipment">
+                    <div class="expand-box buttons equipment" id="equipment">
                         @foreach($equipment as $index)
                             @component('components.buttons.equipmentbutton')
                                 @slot('index', $index)
