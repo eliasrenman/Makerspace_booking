@@ -22,6 +22,10 @@ För att kunna använda denna sida på din skola så krävs en del olika saker s
 * En google developer oauth api nyckel registrerad inom domänen. [Skapa det här](https://console.developers.google.com/apis/)
 * En Mysql eller Mariadb sql server.
 * Composer är installerat
+* PHP
+### Frivilligt
+* En mailserver
+
 ### Installation
 Detta är installations guiden för att clona och sätta up projektet på en server. En del förkunskaper om hur apache eller nginx fungerar krävs.
 
@@ -73,11 +77,11 @@ Roadmap
 * ~~Rest api för att hämta alla relevanta bokningar~~
 * ~~Rest api för att hämta specifika bokningar~~
 * ~~Admin panelsidan (front-end)~~
-* Första användartest för att reda ut front-end och identifiera buggar / missade feature
+* ~~Första användartest för att reda ut front-end och identifiera buggar / missade feature~~
 * ~~Åtgärda buggar / missade features~~
 * ~~Admin loginsida~~
 * ~~Admin loginsystem~~
-* ~~Admin panelsida (funktionalitet, back-end)~~
-* Användartest
-* Live deploy
+* ~~Admin panelsida (funktionalitet, back-end)~~    
+* ~~Användartest~~
+* ~~Live deploy~~
 
