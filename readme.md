@@ -63,6 +63,7 @@ password: HJ42ke28o6zTrSCTJYfmsdIOW3svagtC8jpR6k3pOQzS7EHgdCtHXjrERNpIBAclUuaxcs
 ```
 Efter det så klicka på skapa en ny användare. skapa en ny användare, logga ut. logga in på den nya användaren. ta bort det ordinare kontot.
 Nu behövs det bara läggas till utrustning som ska gå att boka. det görs under adminpanelen.
+
 Roadmap
 ---
 
