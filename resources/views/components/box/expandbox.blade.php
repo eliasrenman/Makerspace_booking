@@ -7,13 +7,8 @@
 
     <div class="row m-0">
         <div class="col-md form-margin mx-0">
-<<<<<<< HEAD
             <h5 class="soleto-bold m-0">
                 <img src="/images/Ikon%20Pil-ner.svg" alt="expandera/ kollapsa box">
-=======
-            <h5 class="soleto-bold m-0" onclick="expandContent({{$id}})">
-                <img src="/images/Ikon Pil-ner.svg">
->>>>>>> a9fe4109f3210acc52f677fa6ccf62cd6a7e6b9c
                 {{$expans ?? 'Visa alla'}}
             </h5>
         </div>
