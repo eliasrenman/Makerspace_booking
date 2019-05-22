@@ -1,87 +1,63 @@
-.header
-  /* min-height: 350px; */
-  margin: 0
+.jsmodal
+  position: fixed
+  background: #fff
+
+.jsmodal-backdrop
+  z-index: 10
+  height: 100vh
   width: 100vw
-  img
-    height: 50px
-    margin-top: 40px
-    margin-bottom: 40px
-
-.row
-  margin-left: 40px
-  margin-right: 40px
-
-.header
-  .main-row
-    /* height: 350px; */
-  .main-column
-    /*
-     *display: flex;
-     *justify-content: flex-end;
-     *flex-direction: column;
-    */
-.header-container
-  margin-bottom: 50px
-  h1
-    font-size: 50px
-    margin-top: 20px
-    margin-bottom: 20px
-
-p
-  font-size: 18px
-  color: #000
-  margin-top: 20px
-  margin-bottom: 20px
-
-.header-container .header-line
-  position: relative
-  bottom: 0px
-  width: 21px
-  border-top: #000 dotted 2px
-
-.mt-50px
-  margin-top: 50px
-
-.button
-  width: 350px
-  height: 80px
-  display: block
-  border-radius: 10px
-  box-shadow: 0px 3px 20px rgba(0, 0, 0, 0.2)
+  top: 0px
+  left: 0px
+  position: fixed
+  background: rgba(0, 0, 0, 0.5)
+  display: flex
+  justify-content: center
+  align-items: center
   transition: all 0.2s ease-in-out
-  margin-top: 40px
+
+.jsmodal-close
+  position: absolute
+  top: 0
+  right: 0
+  padding: 20px
+  text-decoration: none
+  color: #000
+  font-size: 20px
   &:hover
     text-decoration: none
-    box-shadow: 0px 3px 25px rgba(0, 0, 0, 0.2)
-    transform: scale(1.005)
-  img
-    position: relative
-    top: 23px
-    margin-left: 30px
-    margin-right: 20px
-  span
-    position: relative
-    top: 23px
-    font-size: 20px
-    color: #000
 
-@media screen and (max-width: 700px)
-  .header-container h1
-    font-size: 35px
+.jsmodal-small
+  min-width: 500px
+  width: 30%
+  padding: 20px
 
-@media screen and (max-width: 400px)
-  .button
-    width: 250px
-    img
-      margin-left: 20px
-      margin-right: 10px
-    span
-      font-size: 18px
+.jsmodal-medium
+  min-width: 700px
+  width: 50%
+  padding: 20px
 
-@media screen and (max-width: 450px) and (min-width: 400px)
-  .button
-    width: 300px
+.jsmodal-large
+  min-width: 1000px
+  width: 70%
+  padding: 20px
 
-@media screen and (min-width: 700px)
-  .header-container h1
-    min-width: 700px
+.jsmodal-hide-top-hidden
+  top: 100vh
+
+.jsmodal-hide-bottom-hidden
+  bottom: 100vh
+
+.jsmodal-hide-left-hidden
+  left: 100vh
+
+.jsmodal-hide-right-hidden
+  right: 100vh
+
+@media (max-width: 768px)
+  .jsmodal
+    position: unset
+    background: #fff
+  .jsmodal-small, .jsmodal-medium, .jsmodal-large
+    min-width: unset
+    width: unset
+    padding: 20px
