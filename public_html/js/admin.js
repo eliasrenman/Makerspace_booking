@@ -59,3 +59,12 @@ function deleteAdmin(id) {
         document.location.replace('/admin/user/' + id + '/delete');
     }
 }
+
+function expandContent(id) {
+    var div = $(id);
+    if (div.css("max-height") === "2000px") {
+        div.css("max-height", "");
+    } else {
+        div.css('max-height', "2000px");
+    }
+}

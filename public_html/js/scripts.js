@@ -208,6 +208,15 @@ function updateBookings(input) {
     });
 }
 
+function expandContent(id) {
+    var div = $(id);
+    if (div.css("max-height") === "2000px") {
+        div.css("max-height", "");
+    } else {
+        div.css('max-height', "2000px");
+    }
+}
+
 function post(url, json) {
     var http = new XMLHttpRequest();
     http.open('POST', url, true);
