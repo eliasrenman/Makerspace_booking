@@ -7,5 +7,5 @@
     @endslot
     Administratör
     <img class="float-right position-relative item-buttons" src="/images/Ikon%20Delete.svg"
-         onclick="deleteAdmin({{$user['id']}})">
+         onclick="deleteAdmin({{$user['id']}})" alt="ta bort admin konto">
 @endcomponent

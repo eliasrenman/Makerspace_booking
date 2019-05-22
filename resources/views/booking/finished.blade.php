@@ -15,7 +15,7 @@
             <div class="main-column col-lg-8 col-xl-6">
                 <div class="form-box finished">
                     <div class="title-container">
-                        <img src="/images/Ikon%20Klart.svg">
+                        <img src="/images/Ikon%20Klart.svg" alt="klart ikon">
                         <h2 class="soleto-bold magenta">{{$text['header']}}</h2>
                     </div>
                     <div class="header-line"></div>

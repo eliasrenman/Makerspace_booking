@@ -12,13 +12,13 @@
 
 
 <!-- fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:800|Titillium+Web:300,400,600" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:800%7CTitillium+Web:300,400,600" rel="stylesheet">
 </head>
 <body>
 <div class="header granitegray-fill">
     <div class="row">
         <div class="col-lg-3">
-            <a href="/"><img src="/images/NTI-Gymnasiet-Logotyp.svg"/></a>
+            <a href="/"><img src="/images/NTI-Gymnasiet-Logotyp.svg" alt="logotyp, knapp till hem"/></a>
         </div>
         <div class="col-lg-6"></div>
         <div class="col-lg-3"></div>

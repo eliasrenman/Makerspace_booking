@@ -12,7 +12,7 @@
             <div class="log-out-container">
                 <div class="log-out">
                     <a href="{{$logout_route}}" onclick="{{$onclick ?? ''}}">
-                        <img src="/images/Ikon%20logga-ut.svg">
+                        <img src="/images/Ikon%20logga-ut.svg" alt="knapp för att logga ut">
                         <span class="soleto-regular">Logga ut</span>
                     </a>
                     {{$logout_form ?? ''}}
