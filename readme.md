@@ -30,7 +30,7 @@ För att kunna använda denna sida på din skola så krävs en del olika saker s
 Detta är installations guiden för att clona och sätta up projektet på en server. En del förkunskaper om hur apache eller nginx fungerar krävs.
 
 ```
-$ cd /var/www/html // För apache
+$ cd /var/www/ // För apache
 $ git clone https://github.com/Eliasr123/Makerspace_booking.git // klona projektet
 $ cd Makerspace_booking/ //går in i mappen.
 $ cp .env.example .env
@@ -60,7 +60,36 @@ Endast några steg kvar för att få projektet att fungera
 ```
 $ php artisan migrate
 ```
-Nu så borde hemsidan fungera. men för att göra adminsystemet säkert så går en administratör till /admin och loggar in med
+För att skapa en sida i apache så krävs en configurationsfil, denna skapas i 
+```
+cd /etc/apache2/sites-available
+```
+I den mappen skapa en fil some heter exempelvis makerspace.conf. För att redigera den så går det använda nano
+```
+sudo nano makerspace.conf
+```
+Redigera filen och lägg till det som står nedan
+```
+<VirtualHost *:80>
+   ServerName localhost/makerspace
+   ServerAdmin example@example.com
+   DocumentRoot /var/www/makerspace/public_html
+
+   <Directory /var/www/makerspace/public_html>
+       AllowOverride All
+   </Directory>
+   ErrorLog ${APACHE_LOG_DIR}/error.log
+   CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
+```
+Efter filen är redigerad så måste hemsidan startas i apache detta görs genom att skriva, sedan måste apache startas om.
+```
+sudo a2dissite 000-default
+sudo a2ensite makerspace
+sudo service apache2 restart
+```
+
+Nu så borde hemsidan fungera. Den går att komma åt på localhost/makerspace För att göra adminsystemet säkert så går en administratör till /admin och loggar in med
 ```
 email: admin@delete.later
 password: HJ42ke28o6zTrSCTJYfmsdIOW3svagtC8jpR6k3pOQzS7EHgdCtHXjrERNpIBAclUuaxcs4y478
